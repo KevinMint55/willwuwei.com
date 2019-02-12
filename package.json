@@ -1,0 +1,36 @@
+{
+  "name": "my-blog",
+  "version": "1.0.0",
+  "description": "My blog",
+  "license": "MIT",
+  "author": "kevinmint <943642973@qq.com>",
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "nuxt": "^2.4.3"
+  },
+  "devDependencies": {
+    "autoprefixer": "^9.4.7",
+    "node-sass": "^4.11.0",
+    "postcss-import": "^12.0.1",
+    "postcss-loader": "^3.0.0",
+    "postcss-px-to-viewport": "^1.1.0",
+    "postcss-url": "^8.0.0",
+    "sass-loader": "^7.1.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ],
+  "config": {
+    "nuxt": {
+      "host": "0.0.0.0",
+      "port": "999"
+    }
+  }
+}
