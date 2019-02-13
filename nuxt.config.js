@@ -29,6 +29,15 @@ module.exports = {
     max: 1000,
     maxAge: 900000,
   },
+  css: [
+    {
+      src: '~assets/font/iconfont.css',
+    },
+    {
+      src: '~assets/style/reset.scss',
+      lang: 'scss',
+    },
+  ],
   build: {
     postcss: {
       plugins: {
@@ -38,7 +47,7 @@ module.exports = {
         'postcss-px-to-viewport': {
           unitToConvert: 'px',
           viewportWidth: 750,
-          propList:['*', '!font-size'],
+          propList:[],
           viewportUnit: 'vw',
           selectorBlackList: [],
           minPixelValue: 1,

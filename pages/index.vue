@@ -1,11 +1,19 @@
 <template>
-  <div>
-    <h1 :class="s.title">Hello <span :class="s.con">world!</span></h1>
+  <div class="container" :class="s.view">
+    <mainstay />
+    <sidebar />
   </div>
 </template>
 
 <script>
+import mainstay from '~/components/home/mainstay';
+import sidebar from '~/components/home/sidebar';
+
 export default {
+  components: {
+    mainstay,
+    sidebar,
+  },
   data() {
     return {
     };
@@ -14,13 +22,8 @@ export default {
 </script>
 
 <style lang="scss" module="s">
-.title {
+.view {
   display: flex;
-  color: red;
-  width: 20px;
-  font-size: 56px;
-  .con {
-    color: blue;
-  }
+  padding-top: 30px;
 }
 </style>
