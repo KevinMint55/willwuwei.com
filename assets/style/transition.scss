@@ -1,13 +1,41 @@
-// 左侧菜单滑出
-.left-menu-enter-active {
+// 淡入淡出
+.fade-enter-active {
   transition: all .3s linear;
 }
 
-.left-menu-leave-active {
-  transform: scale(0);
+.fade-leave-active {
+  opacity: 0;
   transition: all .3s linear;
 }
 
-.left-menu-enter {
-  transform: scale(0);
+.fade-enter {
+  opacity: 0;
+}
+
+// 高度
+.shrink-enter-active {
+  transition: all .6s linear;
+}
+
+.shrink-leave-active {
+  max-height: 0!important;
+  transition: all .6s linear;
+}
+
+.shrink-enter {
+  max-height: 0!important;
+}
+
+// 淡入淡出
+.slide-enter-active {
+  transition: all .3s linear;
+}
+
+.slide-leave-active {
+  transform: translateY(40px);
+  transition: all .3s linear;
+}
+
+.slide-enter {
+  transform: translateY(40px);
 }

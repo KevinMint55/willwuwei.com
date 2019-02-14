@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import mainstay from '~/components/home/mainstay';
-import sidebar from '~/components/home/sidebar';
+import mainstay from '~/components/mainstay';
+import sidebar from '~/components/sidebar';
 
 export default {
   components: {
@@ -24,6 +24,7 @@ export default {
 <style lang="scss" module="s">
 .view {
   display: flex;
+  flex-wrap: wrap;
   padding-top: 30px;
 }
 </style>

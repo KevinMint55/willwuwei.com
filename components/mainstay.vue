@@ -15,6 +15,10 @@
         <div :class="s.title">
           <h3>{{ article.name }}</h3>
         </div>
+        <div :class="[s.mobile, s.calendar]">
+          <i class="km km-calendar"></i>
+          {{ article.date }}
+        </div>
         <div :class="s.tag">
           <span>
             <i class="km km-tags"></i>
@@ -22,7 +26,7 @@
           </span>
           <span>
             <i class="km km-eye"></i>
-            {{ article.views }}
+            {{ article.views }}°C
           </span>
           <span>
             <i class="km km-guestbook"></i>
@@ -39,13 +43,25 @@
             </div>
           </div>
         </div>
+        <div :class="[s.mobile, s.info]">
+          {{ article.info }}
+        </div>
+        <div :class="[s.mobile, s.read]">
+          阅读全文
+        </div>
       </li>
     </ul>
+    <pagination @on-change="turnPage" :current-page="current" :page-size="pageSize" :total="total" style="margin-bottom: 30px;"></pagination>
   </div>
 </template>
 
 <script>
+import pagination from './pagination.vue';
+
 export default {
+  components: {
+    pagination,
+  },
   data() {
     return {
       articleList: [
@@ -56,8 +72,9 @@ export default {
           tags: ['js'],
           views: 666,
           comments: 4,
-          img: require('../../assets/images/background.jpg'),
+          img: require('../assets/images/background.jpg'),
           info: '测试文章1原来的评论issue没删, 这是测试文章2, 同样测试能否使用date作为gitment的ID',
+          date: '2018-03-21',
         },
         {
           name: '测试文章1',
@@ -66,8 +83,20 @@ export default {
           tags: ['js'],
           views: 666,
           comments: 4,
-          img: require('../../assets/images/background.jpg'),
+          img: require('../assets/images/background.jpg'),
           info: '测试文章1原来的评论issue没删, 这是测试文章2, 同样测试能否使用date作为gitment的ID',
+
+date: '2018-03-21',},
+        {
+          name: '测试文章1',
+          month: '03',
+          day: '30',
+          tags: ['js'],
+          views: 666,
+          comments: 4,
+          img: require('../assets/images/background.jpg'),
+          info: '测试文章1原来的评论issue没删, 这是测试文章2, 同样测试能否使用date作为gitment的ID',
+          date: '2018-03-21',
         },
         {
           name: '测试文章1',
@@ -76,21 +105,19 @@ export default {
           tags: ['js'],
           views: 666,
           comments: 4,
-          img: require('../../assets/images/background.jpg'),
+          img: require('../assets/images/background.jpg'),
           info: '测试文章1原来的评论issue没删, 这是测试文章2, 同样测试能否使用date作为gitment的ID',
-        },
-        {
-          name: '测试文章1',
-          month: '03',
-          day: '30',
-          tags: ['js'],
-          views: 666,
-          comments: 4,
-          img: require('../../assets/images/background.jpg'),
-          info: '测试文章1原来的评论issue没删, 这是测试文章2, 同样测试能否使用date作为gitment的ID',
+          date: '2018-03-21',
         },
       ],
+      current: 1,
+      pageSize: 2,
+      total: 30,
     };
+  },
+  methods: {
+    turnPage(page) {
+    },
   },
 };
 </script>
@@ -133,6 +160,12 @@ export default {
   padding: 20px;
   margin-bottom: 30px;
   border-radius: 4px;
+
+  backface-visibility: hidden;
+  transition-property: transform;
+  transform: perspective(2500px) rotateX(0);
+  transition: all 1s cubic-bezier(.175,.885,.32,1.275);
+  // transform: perspective(2500px) rotateX(-100deg);
   &:hover {
     box-shadow: 0 0 50px black;
   }
@@ -252,6 +285,67 @@ export default {
   }
   &:hover {
     box-shadow: 0 0 50px black;
+  }
+}
+
+@media (max-width: 1040px) {
+  .mainstay {
+    width: 100%;
+  }
+}
+
+.mobile {
+  display: none;
+  &.info {
+    font-size: 12px;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    overflow: auto;
+    color: #666;
+    background-color: #eee;
+  }
+  &.read {
+    font-size: 12px;
+    color: #fff;
+    background-color: #d9534f;
+    padding: 6px 12px;
+    text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
+    &:hover {
+      background-color: #c9302c;
+    }
+  }
+  &.calendar {
+    font-size: 12px;
+    text-align: center;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 760px) {
+  .date {
+    display: none;
+  }
+  .mobile {
+    display: block;
+  }
+  .tag {
+    margin: 5px;
+    > span {
+      color: #3d4450;
+      background-color: transparent;
+      &:hover {
+        background-color: transparent;
+      }
+    }
+  }
+  .content {
+    .item {
+      pointer-events: none;
+    }
   }
 }
 </style>
