@@ -1,6 +1,6 @@
 <template>
   <transition name="fade">
-    <aside :class="s.panel" v-show="showPanel">
+    <aside :class="s.panel" v-show="showPanel" v-visible="{ className: s.animate }">
       <div :class="s.panelHeading">
         <div>
           <i :class="iconClass"></i>
@@ -43,6 +43,14 @@ export default {
   border-radius: 4px;
   background-color: rgba(230,238,232,0.5);
   box-shadow: 0 0 5px #c2c2c2;
+
+  opacity: 0;
+  transform: translateY(100px);
+  transition: all 2s cubic-bezier(.175,.885,.32,1.275);
+  &.animate {
+    opacity: 1;
+    transform: translate(0);
+  }
 }
 
 .panelHeading {

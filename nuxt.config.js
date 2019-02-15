@@ -38,6 +38,14 @@ module.exports = {
       lang: 'scss',
     },
   ],
+  plugins: [
+    {
+      src: '~/plugins/clickoutside',
+    },
+    {
+      src: '~/plugins/visible',
+    },
+  ],
   build: {
     postcss: {
       plugins: {

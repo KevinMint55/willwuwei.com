@@ -7,7 +7,7 @@
       <p>这里是公告内容。配置相关说明请看_config.yml这里是公告内容。配置相关说明请看_config.yml这里是公告内容。</p>
     </div>
     <ul :class="s.articleList">
-      <li :class="s.article" v-for="article in articleList">
+      <li :class="s.article" v-for="article in articleList" v-visible="{ className: s.animate }">
         <div :class="s.date">
           <div :class="s.month">{{ article.month }}月</div>
           <div :class="s.day">{{ article.day }}</div>
@@ -162,10 +162,11 @@ date: '2018-03-21',},
   border-radius: 4px;
 
   backface-visibility: hidden;
-  transition-property: transform;
-  transform: perspective(2500px) rotateX(0);
   transition: all 1s cubic-bezier(.175,.885,.32,1.275);
-  // transform: perspective(2500px) rotateX(-100deg);
+  transform: perspective(2500px) rotateX(-100deg);
+  &.animate {
+    transform: perspective(2500px) rotateX(0);
+  }
   &:hover {
     box-shadow: 0 0 50px black;
   }
@@ -331,6 +332,9 @@ date: '2018-03-21',},
   }
   .mobile {
     display: block;
+  }
+  .article {
+    transform: perspective(2500px) rotateX(0);
   }
   .tag {
     margin: 5px;

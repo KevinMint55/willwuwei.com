@@ -133,6 +133,7 @@ export default {
   }
   &.close {
     opacity: 0;
+    z-index: -1;
     .menuList {
       animation: mclose .4s;
     }

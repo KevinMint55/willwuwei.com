@@ -1,6 +1,6 @@
 <template>
   <div :class="s.sidebar">
-    <aside :class="s.search">
+    <aside :class="s.search" v-visible="{ className: s.animate }">
       <form :class="s.searchForm">
         <input type="text" placeholder="搜索文章~" :class="s.searchInput">
         <button :class="s.searchBtn" type="submit">
@@ -8,7 +8,7 @@
         </button>
       </form>
     </aside>
-    <aside :class="s.panel">
+    <aside :class="s.panel" v-visible="{ className: s.animate }">
       <div :class="s.authorName">KEVINMINT</div>
       <div :class="s.authorInfo">
         <img src="../assets/images/avatar.jpg" alt="">
@@ -38,7 +38,7 @@
         </li>
       </ul>
     </panel>
-    <aside :class="s.panel">
+    <aside :class="s.panel" v-visible="{ className: s.animate }">
       <ul :class="s.tabs">
         <li v-for="tab in ['热门标签', '友情链接', '个人链接']" :class="[curTab === tab ? s.active : '']" @click="curTab = tab">{{ tab }}</li>
       </ul>
@@ -152,6 +152,14 @@ export default {
   border-radius: 4px;
   padding: 8px;
   background-color: rgba(10,10,0,0.7);
+
+  transform: translateY(100px);
+  opacity: 0;
+  transition: all 2s cubic-bezier(.175,.885,.32,1.275);
+  &.animate {
+    opacity: 1;
+    transform: translate(0);
+  }
 }
 
 .searchForm {
@@ -195,6 +203,14 @@ export default {
   border-radius: 4px;
   background-color: rgba(230,238,232,0.5);
   box-shadow: 0 0 5px #c2c2c2;
+
+  backface-visibility: hidden;
+  transform: perspective(2500px) rotateY(100deg);
+  transition: all 3s cubic-bezier(.175,.885,.32,1.275);
+  &.animate {
+    opacity: 1;
+    transform: perspective(2500px) rotateY(0);
+  }
 }
 
 .authorName {
