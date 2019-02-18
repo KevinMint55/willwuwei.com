@@ -1,7 +1,7 @@
 <template>
   <div :id="s.app" ref="app">
     <navbar />
-    <nuxt class="content-main" />
+    <nuxt :class="s.main" />
     <div :class="s.copyright">
       <span>版权所有</span>
       <a href="http://www.miitbeian.gov.cn" target="_blank">粤ICP备17065042号</a>
@@ -11,7 +11,7 @@
         <i class="km km-up"></i>
       </div>
     </transition>
-    <div :class="[s.menu, showMenu ? s.open : s.close]" :style="{ top: `${menuTop}px`, left: `${menuLeft}px`}">
+    <div :class="[s.menu, showMenu ? s.open : s.close]" :style="{ top: `${menuTop}px`, left: `${menuLeft}px`}" v-clickoutside="closeMenu">
       <ul :class="s.menuList">
         <li style="left: 50%; top: 15%;">首页</li>
         <li style="left: 80.3109%; top: 32.5%;">下一页</li>
@@ -21,11 +21,13 @@
         <li style="left: 19.6891%; top: 32.5%;">上一页</li>
       </ul>
     </div>
+    <canvas ref="star" :class="s.star"></canvas>
   </div>
 </template>
 
 <script>
 import navbar from '~/components/navbar.vue';
+import Star from '~/plugins/star';
 
 export default {
   components: {
@@ -65,7 +67,9 @@ export default {
         this.menuLeft = e.x - 150;
       }
     };
+    this.initStar(this.$refs.star);
   },
+  mixins: [Star],
   methods: {
     backToTop() {
       const currentScroll = this.$refs.app.scrollTop;
@@ -74,15 +78,20 @@ export default {
         this.$refs.app.scrollTo(0, currentScroll - (currentScroll / 5));
       }
     },
+    closeMenu() {
+      this.showMenu = false;
+    },
   },
 };
 </script>
 
 <style lang="scss" module="s">
 #app {
+  position: relative;
+  z-index: 2;
   height: 100vh;
-  background-image: url('~assets/images/background.jpg');
-  overflow-y: auto; 
+  overflow-y: auto;
+  background-color: #000;
 }
 
 .copyright {
@@ -101,6 +110,15 @@ export default {
   }
 }
 
+.star {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
 .backToTop {
   position: fixed;
   bottom: 20px;
@@ -115,6 +133,7 @@ export default {
   border-radius: 50%;
   border: 2px solid #fff;
   cursor: pointer;
+  z-index: 2;
   &:hover {
     color: #d9534f;
     border-color: #d9534f;
@@ -125,6 +144,7 @@ export default {
 .menu {
   position: fixed;
   transition: all .4s;
+  z-index: 3;
   &.open {
     opacity: 1;
     .menuList {
@@ -187,5 +207,10 @@ export default {
     opacity: 0;
     transform: scale(0.1) rotate(-270deg);
   }
+}
+
+.main {
+  position: relative;
+  z-index: 2;
 }
 </style>

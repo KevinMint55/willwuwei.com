@@ -35,11 +35,6 @@ export default {
           path: '/archives',
         },
         {
-          name: '分类',
-          icon: 'km-apps',
-          path: '/category',
-        },
-        {
           name: '标签',
           icon: 'km-tags',
           path: '/tags',
@@ -64,12 +59,14 @@ export default {
 
 <style lang="scss" module="s">
 .header {
+  position: relative;
   font-size: 14px;
   border-radius: 0;
   border-color: #080808;
   background-color: rgba(10,10,0,0.7);
   box-shadow: 0 0 8px black;
   min-height: 54px;
+  z-index: 3;
 }
 
 .main {
