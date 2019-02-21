@@ -62,7 +62,7 @@ export default {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
-  position: absolute;
+  position: absolute!important;
   top: 0;
   left: 0;
   right: 0;

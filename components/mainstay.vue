@@ -1,5 +1,5 @@
 <template>
-  <div :class="s.mainstay">
+  <div class="mainstay">
     <div :class="s.notice">
       <button :class="s.close">
         <i class="km km-close"></i>
@@ -13,7 +13,7 @@
           <div :class="s.day">{{ article.day }}</div>
         </div>
         <div :class="s.title">
-          <h3>{{ article.name }}</h3>
+          <h3 @click="$router.push({ path: `/post/${article.id}` })">{{ article.name }}</h3>
         </div>
         <div :class="[s.mobile, s.calendar]">
           <i class="km km-calendar"></i>
@@ -66,6 +66,7 @@ export default {
     return {
       articleList: [
         {
+          id: '1',
           name: '测试文章1',
           month: '03',
           day: '30',
@@ -77,6 +78,7 @@ export default {
           date: '2018-03-21',
         },
         {
+          id: '2',
           name: '测试文章1',
           month: '03',
           day: '30',
@@ -85,9 +87,9 @@ export default {
           comments: 4,
           img: require('../assets/images/background.jpg'),
           info: '测试文章1原来的评论issue没删, 这是测试文章2, 同样测试能否使用date作为gitment的ID',
-
-date: '2018-03-21',},
+          date: '2018-03-21',},
         {
+          id: '3',
           name: '测试文章1',
           month: '03',
           day: '30',
@@ -99,6 +101,7 @@ date: '2018-03-21',},
           date: '2018-03-21',
         },
         {
+          id: '4',
           name: '测试文章1',
           month: '03',
           day: '30',
@@ -117,17 +120,17 @@ date: '2018-03-21',},
   },
   methods: {
     turnPage(page) {
+      if (page === 1) {
+        this.$router.push('/');
+        return;
+      }
+      this.$router.push({ query: { page }});
     },
   },
 };
 </script>
 
 <style lang="scss" module="s">
-.mainstay {
-  width: 66%;
-  padding: 0 15px;
-}
-
 .notice {
   position: relative;
   background-color: rgba(230,238,232,0.5);
@@ -286,12 +289,6 @@ date: '2018-03-21',},
   }
   &:hover {
     box-shadow: 0 0 50px black;
-  }
-}
-
-@media (max-width: 1040px) {
-  .mainstay {
-    width: 100%;
   }
 }
 
