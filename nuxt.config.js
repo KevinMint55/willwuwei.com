@@ -45,6 +45,9 @@ module.exports = {
     {
       src: '~/plugins/visible',
     },
+    {
+      src: '~/plugins/axios',
+    },
   ],
   build: {
     postcss: {

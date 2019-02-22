@@ -21,6 +21,7 @@
         <li style="left: 19.6891%; top: 32.5%;">上一页</li>
       </ul>
     </div>
+    <div ref="nest"></div>
     <canvas ref="star" :class="s.star"></canvas>
   </div>
 </template>
