@@ -50,24 +50,24 @@ export default {
         this.showToTop = false;
       }
     });
-    window.oncontextmenu = (e) => {
-      e.preventDefault();
-      this.showMenu = !this.showMenu;
-      if (e.y - 150 < 0) {
-        this.menuTop = 0;
-      } else if (e.y - 150 > document.body.clientHeight - 300) {
-        this.menuTop = document.body.clientHeight - 300;
-      } else {
-        this.menuTop = e.y - 150;
-      }
-      if (e.x - 150 < 0) {
-        this.menuLeft = 0;
-      } else if (e.x - 150 > document.body.clientWidth - 300) {
-        this.menuLeft = document.body.clientWidth - 300;
-      } else {
-        this.menuLeft = e.x - 150;
-      }
-    };
+    // window.oncontextmenu = (e) => {
+    //   e.preventDefault();
+    //   this.showMenu = !this.showMenu;
+    //   if (e.y - 150 < 0) {
+    //     this.menuTop = 0;
+    //   } else if (e.y - 150 > document.body.clientHeight - 300) {
+    //     this.menuTop = document.body.clientHeight - 300;
+    //   } else {
+    //     this.menuTop = e.y - 150;
+    //   }
+    //   if (e.x - 150 < 0) {
+    //     this.menuLeft = 0;
+    //   } else if (e.x - 150 > document.body.clientWidth - 300) {
+    //     this.menuLeft = document.body.clientWidth - 300;
+    //   } else {
+    //     this.menuLeft = e.x - 150;
+    //   }
+    // };
     this.initStar(this.$refs.star);
   },
   mixins: [Star],

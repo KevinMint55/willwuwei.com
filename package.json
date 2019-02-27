@@ -11,6 +11,7 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@nuxtjs/axios": "^5.3.6",
     "axios": "^0.18.0",
     "github-markdown-css": "^3.0.1",
     "highlight.js": "^9.14.2",

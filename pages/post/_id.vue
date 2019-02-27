@@ -1,8 +1,8 @@
 <template>
   <div class="container view">
     <div :class="s.blog">
-      <div v-html="info.content" class="blog-content" v-if="info.editorType === 'richtext'"></div>
-      <div v-html="compiledMarkdown" class="markdown-body" v-if="info.editorType === 'markdown'"></div>
+      <div v-html="post.content" class="blog-content" v-if="post.editorType === 'richtext'"></div>
+      <div v-html="compiledMarkdown" class="markdown-body" v-if="post.editorType === 'markdown'"></div>
     </div>
   </div>
 </template>
@@ -10,8 +10,8 @@
 <script>
 import marked from 'marked';
 import hljs from 'highlight.js';
-// import 'github-markdown-css';
 import 'highlight.js/styles/github.css';
+import '~/assets/style/github-markdown.css';
 
 const rendererMD = new marked.Renderer();
 marked.setOptions({
@@ -27,24 +27,23 @@ marked.setOptions({
 });
 
 export default {
+  async asyncData ({ $axios }) {
+    const post = await $axios.$get('blog/details?id=5c6fb74a4d36c43fa018fee2').catch((err) => {
+      console.log('err', err);
+    });
+    if (post) {
+      return { post };
+    }
+  },
   data() {
     return {
-      info: {
-        content: '',
-      },
+      post: {},
     };
   },
   computed: {
     compiledMarkdown() {
-      return marked(this.info.content, { sanitize: true });
+      return marked(this.post.content, { sanitize: true });
     },
-  },
-  created() {
-    // m: 5c6fb74a4d36c43fa018fee2
-    // r: 5c6fb76f4d36c43fa018fee3
-    this.$http.get('blog/details?id=5c6fb74a4d36c43fa018fee2').then((res) => {
-      this.info = res.data.data;
-    });
   },
   methods: {
   },

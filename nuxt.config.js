@@ -38,6 +38,9 @@ module.exports = {
       lang: 'scss',
     },
   ],
+  modules: [
+    '@nuxtjs/axios',
+  ],
   plugins: [
     {
       src: '~/plugins/clickoutside',
