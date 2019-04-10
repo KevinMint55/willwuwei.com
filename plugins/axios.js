@@ -12,6 +12,12 @@ export default function ({ $axios, redirect }) {
 
   $axios.onResponse(response => {
     const res = response.data;
+    if (res.status === 404) {
+      redirect('/404');
+    }
+    if (res.status === 5000) {
+      redirect('/5000');
+    }
     if (res.status === 200) {
       return res;
     }
@@ -19,8 +25,8 @@ export default function ({ $axios, redirect }) {
   })
 
   $axios.onError(error => {
-    if (error.status === 4004) {
-      redirect('/4004')
+    if (error.status === 404) {
+      redirect('/404');
     }
   })
 }

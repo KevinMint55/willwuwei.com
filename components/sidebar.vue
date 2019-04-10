@@ -23,21 +23,6 @@
         </li>
       </ul>
     </panel>
-    <panel icon-class="km km-recent" name="近期文章">
-      <ul>
-        <li v-for="post in hotPosts" :class="s.post">
-          <span :class="s.name">{{ post.name }}</span>
-        </li>
-      </ul>
-    </panel>
-    <panel icon-class="km km-random" name="随机文章">
-      <ul>
-        <li v-for="post in hotPosts" :class="s.post">
-          <span :class="s.name">{{ post.name }}</span>
-          <span :class="s.views">{{ post.views }}°C</span>
-        </li>
-      </ul>
-    </panel>
     <aside :class="s.panel" v-visible="{ className: s.animate }">
       <ul :class="s.tabs">
         <li v-for="tab in ['热门标签', '友情链接', '个人链接']" :class="[curTab === tab ? s.active : '']" @click="curTab = tab">{{ tab }}</li>
@@ -98,7 +83,7 @@ export default {
           views: 141,
         },
       ],
-      curTab: '友情链接',
+      curTab: '热门标签',
       tags: ['杂谈', 'python', 'javascript', 'php', 'AngularJS', '网络相关', 'Hexo', '逆向', '云服务器', '博客搭建'],
       friends: [
         {

@@ -9,15 +9,15 @@
     <ul :class="s.articleList">
       <li :class="s.article" v-for="article in articleList" v-visible="{ className: s.animate }">
         <div :class="s.date">
-          <div :class="s.month">{{ article.month }}月</div>
-          <div :class="s.day">{{ article.day }}</div>
+          <div :class="s.month">{{ article.updatedAt | getMonth }}月</div>
+          <div :class="s.day">{{ article.updatedAt | getDate }}</div>
         </div>
         <div :class="s.title">
-          <h3 @click="$router.push({ path: `/post/${article.id}` })">{{ article.name }}</h3>
+          <h3 @click="$router.push({ path: `/post/${article._id}` })">{{ article.title }}</h3>
         </div>
         <div :class="[s.mobile, s.calendar]">
           <i class="km km-calendar"></i>
-          {{ article.date }}
+          {{ article.updatedAt.split(' ')[0] }}
         </div>
         <div :class="s.tag">
           <span>
@@ -26,32 +26,38 @@
           </span>
           <span>
             <i class="km km-eye"></i>
-            {{ article.views }}°C
+            {{ article.PV }}°C
           </span>
           <span>
             <i class="km km-guestbook"></i>
-            {{ article.comments }}
+            {{ article.comments || 0 }}
           </span>
         </div>
         <div :class="s.content">
           <div :class="s.item">
             <div :class="s.img">
-              <img :src="article.img" alt="">
+              <img :src="$utils.setCdn(article.cover)" alt="">
             </div>
             <div :class="s.info">
-              {{ article.info }}
+              {{ article.content | getFirstLine(article.editorType) }}
             </div>
           </div>
         </div>
         <div :class="[s.mobile, s.info]">
-          {{ article.info }}
+          {{ article.content.split('\n')[0] }}
         </div>
         <div :class="[s.mobile, s.read]">
           阅读全文
         </div>
       </li>
     </ul>
-    <pagination @on-change="turnPage" :current-page="current" :page-size="pageSize" :total="total" style="margin-bottom: 30px;"></pagination>
+    <pagination
+      @on-change="turnPage"
+      :current-page="pageCurrent"
+      :page-size="pageSize"
+      :total="total"
+      style="margin-bottom: 30px;">
+    </pagination>
   </div>
 </template>
 
@@ -59,64 +65,33 @@
 import pagination from './pagination.vue';
 
 export default {
+  props: {
+    articleList: {
+      type: null,
+      default: () => [],
+    },
+    pageCurrent: {
+      type: Number,
+      default: 1,
+    },
+    total: {
+      type: Number,
+      default: 0,
+    },
+  },
   components: {
     pagination,
   },
   data() {
     return {
-      articleList: [
-        {
-          id: '1',
-          name: '测试文章1',
-          month: '03',
-          day: '30',
-          tags: ['js'],
-          views: 666,
-          comments: 4,
-          img: require('../assets/images/background.jpg'),
-          info: '测试文章1原来的评论issue没删, 这是测试文章2, 同样测试能否使用date作为gitment的ID',
-          date: '2018-03-21',
-        },
-        {
-          id: '2',
-          name: '测试文章1',
-          month: '03',
-          day: '30',
-          tags: ['js'],
-          views: 666,
-          comments: 4,
-          img: require('../assets/images/background.jpg'),
-          info: '测试文章1原来的评论issue没删, 这是测试文章2, 同样测试能否使用date作为gitment的ID',
-          date: '2018-03-21',},
-        {
-          id: '3',
-          name: '测试文章1',
-          month: '03',
-          day: '30',
-          tags: ['js'],
-          views: 666,
-          comments: 4,
-          img: require('../assets/images/background.jpg'),
-          info: '测试文章1原来的评论issue没删, 这是测试文章2, 同样测试能否使用date作为gitment的ID',
-          date: '2018-03-21',
-        },
-        {
-          id: '4',
-          name: '测试文章1',
-          month: '03',
-          day: '30',
-          tags: ['js'],
-          views: 666,
-          comments: 4,
-          img: require('../assets/images/background.jpg'),
-          info: '测试文章1原来的评论issue没删, 这是测试文章2, 同样测试能否使用date作为gitment的ID',
-          date: '2018-03-21',
-        },
-      ],
-      current: 1,
-      pageSize: 2,
-      total: 30,
+      data: [],
+      pageSize: 5,
     };
+  },
+  created() {
+    if (this.$route.params.num) {
+      this.current = Number(this.$route.params.num);
+    }
   },
   methods: {
     turnPage(page) {
@@ -124,7 +99,26 @@ export default {
         this.$router.push('/');
         return;
       }
-      this.$router.push({ query: { page }});
+      this.$router.push(`/page/${page}`);
+    },
+  },
+  filters: {
+    getMonth(val) {
+      let month = new Date(val).getMonth() + 1;
+      if (month < 10) {
+        month = `0${month}`;
+      }
+      return month;
+    },
+    getDate(val) {
+      let date = new Date(val).getDate();
+      if (date < 10) {
+        date = `0${date}`;
+      }
+      return date;
+    },
+    getFirstLine(val, type) {
+      return val.split(' ')[0];
     },
   },
 };
@@ -224,14 +218,14 @@ export default {
     background-color: rgba(10,10,0,0.7);
     margin-right: 6px;
     color: #fff;
-    padding: .2em .6em .3em;
+    padding: .3em .6em;
     border-radius: .25em;
     font-size: 12px;
     cursor: pointer;
     transition: all .3s ease-in-out;
     i {
       margin-right: 2px;
-      vertical-align: middle;
+      vertical-align: text-top;
     }
     &:hover {
       background-color: #d9534f;

@@ -1,7 +1,7 @@
 <template>
   <header :class="s.header">
     <div class="container" :class="s.main">
-      <div :class="s.brand">
+      <div :class="s.brand" @click="$router.push('/')">
         沐夏~
       </div>
       <div :class="[s.toggle, showMenu ? s.active: '']" @click="showMenu = !showMenu">
@@ -86,6 +86,7 @@ export default {
   background-color: rgba(0,0,0,0);
   text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #228DFF, 0 0 35px #228DFF, 0 0 40px #228DFF, 0 0 50px #228DFF, 0 0 75px #228DFF;
   padding: 0 15px;
+  cursor: pointer;
 }
 
 .navList {

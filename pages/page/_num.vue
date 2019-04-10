@@ -17,8 +17,12 @@ export default {
     mainstay,
     sidebar,
   },
-  async asyncData ({ $axios }) {
-    const data = await $axios.$get('blog');
+  async asyncData ({ $axios, params }) {
+    const data = await $axios.$get('blog', {
+      params: {
+        pageCurrent: params.num,
+      },
+    });
     if (data) {
       return {
         articleList: data.list,

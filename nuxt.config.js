@@ -51,6 +51,9 @@ module.exports = {
     {
       src: '~/plugins/axios',
     },
+    {
+      src: '~/plugins/utils',
+    },
   ],
   build: {
     postcss: {
