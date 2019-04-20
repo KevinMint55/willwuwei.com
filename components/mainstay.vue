@@ -9,15 +9,15 @@
     <ul :class="s.articleList">
       <li :class="s.article" v-for="article in articleList" v-visible="{ className: s.animate }">
         <div :class="s.date">
-          <div :class="s.month">{{ article.updatedAt | getMonth }}月</div>
-          <div :class="s.day">{{ article.updatedAt | getDate }}</div>
+          <div :class="s.month">{{ article.showDate | getMonth }}月</div>
+          <div :class="s.day">{{ article.showDate | getDate }}</div>
         </div>
         <div :class="s.title">
           <h3 @click="$router.push({ path: `/post/${article._id}` })">{{ article.title }}</h3>
         </div>
         <div :class="[s.mobile, s.calendar]">
           <i class="km km-calendar"></i>
-          {{ article.updatedAt.split(' ')[0] }}
+          {{ $utils.formatDate(article.showDate, 'yyyy-MM-dd') }}
         </div>
         <div :class="s.tag">
           <span>

@@ -12,7 +12,7 @@
           </span>
           <span>
             <i class="km km-calendar"></i>
-            {{ post.updatedAt.split(' ')[0] }}
+            {{ $utils.formatDate(post.showDate, 'yyyy-MM-dd') }}
           </span>
           <span>
             <i class="km km-eye"></i>
@@ -20,6 +20,9 @@
           </span>
         </div>
       </div>
+      <figure :class="s.cover">
+        <img :src="$utils.setCdn(post.cover)" alt="">
+      </figure>
       <div v-html="post.content" class="blog-content" v-if="post.editorType === 'richtext'"></div>
       <div v-html="compiledMarkdown" class="markdown-body" v-if="post.editorType === 'markdown'"></div>
     </div>
@@ -107,6 +110,15 @@ export default {
     &:hover {
       background-color: #d9534f;
     }
+  }
+}
+
+.cover {
+  width: 100%;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 }
 

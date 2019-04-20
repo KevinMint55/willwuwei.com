@@ -40,11 +40,6 @@ export default {
           path: '/category',
         },
         {
-          name: '标签',
-          icon: 'km-tags',
-          path: '/tags',
-        },
-        {
           name: '关于我',
           icon: 'km-about',
           path: '/about',
