@@ -50,28 +50,31 @@ export default {
         this.showToTop = false;
       }
     });
-    // window.oncontextmenu = (e) => {
-    //   e.preventDefault();
-    //   this.showMenu = !this.showMenu;
-    //   if (e.y - 150 < 0) {
-    //     this.menuTop = 0;
-    //   } else if (e.y - 150 > document.body.clientHeight - 300) {
-    //     this.menuTop = document.body.clientHeight - 300;
-    //   } else {
-    //     this.menuTop = e.y - 150;
-    //   }
-    //   if (e.x - 150 < 0) {
-    //     this.menuLeft = 0;
-    //   } else if (e.x - 150 > document.body.clientWidth - 300) {
-    //     this.menuLeft = document.body.clientWidth - 300;
-    //   } else {
-    //     this.menuLeft = e.x - 150;
-    //   }
-    // };
+    this.initRightMenu();
     this.initStar(this.$refs.star);
   },
   mixins: [Star],
   methods: {
+    initRightMenu() {
+      window.oncontextmenu = (e) => {
+        e.preventDefault();
+        this.showMenu = !this.showMenu;
+        if (e.y - 150 < 0) {
+          this.menuTop = 0;
+        } else if (e.y - 150 > document.body.clientHeight - 300) {
+          this.menuTop = document.body.clientHeight - 300;
+        } else {
+          this.menuTop = e.y - 150;
+        }
+        if (e.x - 150 < 0) {
+          this.menuLeft = 0;
+        } else if (e.x - 150 > document.body.clientWidth - 300) {
+          this.menuLeft = document.body.clientWidth - 300;
+        } else {
+          this.menuLeft = e.x - 150;
+        }
+      };
+    },
     backToTop() {
       const currentScroll = this.$refs.app.scrollTop;
       if (currentScroll > 0) {
@@ -176,11 +179,12 @@ export default {
     color: #fff;
     text-shadow: #dc965a 1px 0px 0px, #dc965a 0px 1px 0px, #dc965a -1px 0px 0px, #dc965a 0px -1px 0px;
     background-color: rgba(10,10,0,0.7);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
     border-radius: 50%;
     cursor: pointer;
     margin-left: -41px;
     margin-top: -41px;
-    transition: all .3s;
+    transition: all 0.3s;
     &:hover {
       text-shadow: #6cf 1px 0px 0px, #6cf 0px 1px 0px, #6cf -1px 0px 0px, #6cf 0px -1px 0px;
       box-shadow: #fff 0px 0px 80px inset;

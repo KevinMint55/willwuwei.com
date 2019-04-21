@@ -4,7 +4,7 @@
       :articleList="articleList"
       :pageCurrent="pageCurrent"
       :total="total" />
-    <sidebar />
+    <sidebar :hotList="hotList" :tagsList="tagsList"/>
   </div>
 </template>
 
@@ -19,11 +19,15 @@ export default {
   },
   async asyncData ({ $axios }) {
     const data = await $axios.$get('blog');
+    const hotList = await $axios.$get('blog/hot');
+    const tagsList = await $axios.$get('blog/tags');
     if (data) {
       return {
         articleList: data.list,
         pageCurrent: data.pageCurrent,
         total: data.count,
+        hotList,
+        tagsList,
       };
     }
   },
@@ -32,6 +36,7 @@ export default {
       articleList: [],
       pageCurrent: 1,
       total: 0,
+      hotList: [],
     };
   },
 };

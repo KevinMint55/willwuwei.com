@@ -17,9 +17,9 @@
     </aside>
     <panel icon-class="km km-hot" name="最热文章">
       <ul>
-        <li v-for="post in hotPosts" :class="s.post">
-          <span :class="s.name">{{ post.name }}</span>
-          <span :class="s.views">{{ post.views }}°C</span>
+        <li v-for="post in hotList" :class="s.post">
+          <span :class="s.name" @click="$router.push({ path: `/post/${post._id}` })">{{ post.title }}</span>
+          <span :class="s.views">{{ post.PV }}°C</span>
         </li>
       </ul>
     </panel>
@@ -30,7 +30,7 @@
       <div :class="s.tabContent">
         <transition name="fade" mode="out-in">
           <ul :class="s.tag" v-if="curTab === '热门标签'" key="热门标签">
-            <li v-for="item in tags" :style="{ fontSize: `${randomSize()}px`, backgroundColor: randomColor() }">{{ item }}</li>
+            <li v-for="item in tagsList" :style="{ fontSize: `${randomSize()}px`, backgroundColor: randomColor() }">{{ item.name }}({{ item.count }})</li>
           </ul>
           <ul :class="s.url" v-if="curTab === '友情链接'" key="友情链接">
             <li v-for="item in friends">{{ item.name }}</li>
@@ -48,43 +48,22 @@
 import panel from './panel.vue';
 
 export default {
+  props: {
+    hotList: {
+      type: null,
+      default: () => [],
+    },
+    tagsList: {
+      type: null,
+      default: () => [],
+    },
+  },
   components: {
     panel,
   },
   data() {
     return {
-      hotPosts: [
-        {
-          name: '测试文章1',
-          views: 2343,
-        },
-        {
-          name: '测试文章1',
-          views: 23,
-        },
-        {
-          name: '测试文章1',
-          views: 341,
-        },
-        {
-          name: '测试文章1',
-          views: 241,
-        },
-        {
-          name: '测试文章1',
-          views: 341,
-        },
-        {
-          name: '测试文章1',
-          views: 231,
-        },
-        {
-          name: '测试文章1',
-          views: 141,
-        },
-      ],
       curTab: '热门标签',
-      tags: ['杂谈', 'python', 'javascript', 'php', 'AngularJS', '网络相关', 'Hexo', '逆向', '云服务器', '博客搭建'],
       friends: [
         {
           name: 'KDays Forum',
@@ -220,6 +199,7 @@ export default {
     }
   }
   p {
+    color: #F3E5E5;
     margin: 10px 0;
   }
 }
@@ -233,7 +213,7 @@ export default {
   transition: all .5s ease-in-out;
   font-size: 12px;
   .name {
-    color: #666;
+    color: #fff;
     cursor: pointer;
     &:hover {
       color: #b94a48;
@@ -264,7 +244,7 @@ export default {
   > li {
     font-size: 12px;
     padding: 10px 15px;
-    color: #666;
+    color: #F3E5E5;
     cursor: pointer;
     border-radius: 5px;
     transition: all .3s;
@@ -300,7 +280,7 @@ export default {
     font-size: 12px;
     > li {
       padding: 10px 15px;
-      color: #666;
+      color: #F3E5E5;
       cursor: pointer;
       &:hover {
         color: #fff;

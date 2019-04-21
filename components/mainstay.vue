@@ -1,10 +1,10 @@
 <template>
   <div class="mainstay">
-    <div :class="s.notice">
+    <div :class="s.notice" v-if="notice">
       <button :class="s.close">
         <i class="km km-close"></i>
       </button>
-      <p>这里是公告内容。配置相关说明请看_config.yml这里是公告内容。配置相关说明请看_config.yml这里是公告内容。</p>
+      <p>{{ notice }}</p>
     </div>
     <ul :class="s.articleList">
       <li :class="s.article" v-for="article in articleList" v-visible="{ className: s.animate }">
@@ -86,6 +86,7 @@ export default {
     return {
       data: [],
       pageSize: 5,
+      notice: '',
     };
   },
   created() {
