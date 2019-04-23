@@ -1,10 +1,7 @@
 <template>
   <div class="container" :class="s.view">
-    <mainstay
-      :articleList="articleList"
-      :pageCurrent="pageCurrent"
-      :total="total" />
-    <sidebar :hotList="hotList" :tagsList="tagsList"/>
+    <mainstay />
+    <sidebar />
   </div>
 </template>
 
@@ -17,26 +14,14 @@ export default {
     mainstay,
     sidebar,
   },
-  async asyncData ({ $axios }) {
-    const data = await $axios.$get('blog');
-    const hotList = await $axios.$get('blog/hot');
-    const tagsList = await $axios.$get('blog/tags');
-    if (data) {
-      return {
-        articleList: data.list,
-        pageCurrent: data.pageCurrent,
-        total: data.count,
-        hotList,
-        tagsList,
-      };
-    }
+  async fetch ({ store }) {
+    return Promise.all([
+      store.dispatch('loadSideBarData'),
+      store.dispatch('getArticles'),
+    ])
   },
   data() {
     return {
-      articleList: [],
-      pageCurrent: 1,
-      total: 0,
-      hotList: [],
     };
   },
 };

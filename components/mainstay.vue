@@ -39,12 +39,12 @@
               <img :src="$utils.setCdn(article.cover)" alt="">
             </div>
             <div :class="s.info">
-              {{ article.content | getFirstLine(article.editorType) }}
+              {{ article.description }}
             </div>
           </div>
         </div>
         <div :class="[s.mobile, s.info]">
-          {{ article.content.split('\n')[0] }}
+          {{ article.description }}
         </div>
         <div :class="[s.mobile, s.read]">
           阅读全文
@@ -65,29 +65,25 @@
 import pagination from './pagination.vue';
 
 export default {
-  props: {
-    articleList: {
-      type: null,
-      default: () => [],
-    },
-    pageCurrent: {
-      type: Number,
-      default: 1,
-    },
-    total: {
-      type: Number,
-      default: 0,
-    },
-  },
   components: {
     pagination,
   },
   data() {
     return {
-      data: [],
       pageSize: 5,
       notice: '',
     };
+  },
+  computed: {
+    articleList() {
+      return this.$store.state.articles.list;
+    },
+    pageCurrent() {
+      return this.$store.state.articles.pageCurrent;
+    },
+    total() {
+      return this.$store.state.articles.count;
+    },
   },
   created() {
     if (this.$route.params.num) {
@@ -117,9 +113,6 @@ export default {
         date = `0${date}`;
       }
       return date;
-    },
-    getFirstLine(val, type) {
-      return val.split(' ')[0];
     },
   },
 };

@@ -35,11 +35,6 @@ export default {
           path: '/archives',
         },
         {
-          name: '分类',
-          icon: 'km-apps',
-          path: '/category',
-        },
-        {
           name: '关于我',
           icon: 'km-about',
           path: '/about',

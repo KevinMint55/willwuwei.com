@@ -1,32 +1,34 @@
 /*
+ *
  * axios
- */
+ *
+*/
 
-import apiConfig from '~/api.config';
+import Vue from 'vue'
+import axios from 'axios'
+import apiConfig from '~/api.config'
 
-export default function ({ $axios, redirect }) {
-  $axios.defaults.baseURL = apiConfig.baseURL;
+const service = axios.create({
+  baseURL: apiConfig.baseURL
+})
 
-  // $axios.onRequest(config => {
-  // })
+// 拦截器
+service.interceptors.request.use(config => {
+  return config
+}, error => {
+  return Promise.reject(error)
+})
 
-  $axios.onResponse(response => {
-    const res = response.data;
-    if (res.status === 404) {
-      redirect('/404');
-    }
-    if (res.status === 5000) {
-      redirect('/5000');
-    }
-    if (res.status === 200) {
-      return res;
-    }
-    return Promise.reject(res);
-  })
+service.interceptors.response.use(response => {
+  const res = response.data;
+  if (res.status === 200) {
+    return res.data;
+  }
+  return Promise.reject(res);
+}, error => {
+  return Promise.reject(error)
+})
 
-  $axios.onError(error => {
-    if (error.status === 404) {
-      redirect('/404');
-    }
-  })
-}
+Vue.prototype.$http = axios
+
+export default service

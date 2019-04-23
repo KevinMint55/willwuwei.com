@@ -10,6 +10,9 @@
 import sidebar from '~/components/sidebar';
 
 export default {
+  async fetch ({ store }) {
+    await store.dispatch('loadSideBarData');
+  },
   components: {
     sidebar,
   },

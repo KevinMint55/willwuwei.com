@@ -25,15 +25,31 @@
     </panel>
     <aside :class="s.panel" v-visible="{ className: s.animate }">
       <ul :class="s.tabs">
-        <li v-for="tab in ['热门标签', '友情链接', '个人链接']" :class="[curTab === tab ? s.active : '']" @click="curTab = tab">{{ tab }}</li>
+        <li v-for="tab in ['网站导航', '友情链接', '个人链接']" :class="[curTab === tab ? s.active : '']" @click="curTab = tab">{{ tab }}</li>
       </ul>
       <div :class="s.tabContent">
         <transition name="fade" mode="out-in">
-          <ul :class="s.tag" v-if="curTab === '热门标签'" key="热门标签">
-            <li v-for="item in tagsList" :style="{ fontSize: `${randomSize()}px`, backgroundColor: randomColor() }">{{ item.name }}({{ item.count }})</li>
-          </ul>
+          <div v-if="curTab === '网站导航'" key="网站导航">
+            <p :class="s.title">
+              <i class="km km-apps"></i>
+              <span>分类</span>
+            </p>
+            <ul :class="s.category">
+              <li v-for="item in category">
+                <span>{{ item.name }}</span>
+                <i>（{{ item.count }}）</i>
+              </li>
+            </ul>
+            <p :class="s.title">
+              <i class="km km-tags"></i>
+              <span>标签</span>
+            </p>
+            <ul :class="s.tag">
+              <li v-for="item in tagsList" :style="{ fontSize: `${randomSize()}px`, backgroundColor: randomColor() }">{{ item.name }}（{{ item.count }}）</li>
+            </ul>
+          </div>
           <ul :class="s.url" v-if="curTab === '友情链接'" key="友情链接">
-            <li v-for="item in friends">{{ item.name }}</li>
+            <li v-for="item in friends" @click="openFriend(item.url)">{{ item.name }}</li>
           </ul>
           <ul :class="s.url" v-if="curTab === '个人链接'" key="个人链接">
             <li v-for="item in personal">{{ item.name }}</li>
@@ -48,51 +64,40 @@
 import panel from './panel.vue';
 
 export default {
-  props: {
-    hotList: {
-      type: null,
-      default: () => [],
-    },
-    tagsList: {
-      type: null,
-      default: () => [],
-    },
-  },
   components: {
     panel,
   },
   data() {
     return {
-      curTab: '热门标签',
+      curTab: '网站导航',
       friends: [
         {
-          name: 'KDays Forum',
-          url: '',
+          name: 'Josh',
+          url: 'https://www.joshwong.cn/',
         },
         {
-          name: '绅士导航',
-          url: '',
-        },
-        {
-          name: '萌导航',
-          url: '',
+          name: 'Nooldey',
+          url: 'https://zhuweisheng.com.cn/',
         },
       ],
       personal: [
         {
           name: 'Github',
-          url: '',
-        },
-        {
-          name: 'Coding',
-          url: '',
-        },
-        {
-          name: '知乎',
-          url: '',
+          url: 'https://github.com/KevinMint55',
         },
       ],
     };
+  },
+  computed: {
+    hotList() {
+      return this.$store.state.hotList;
+    },
+    category() {
+      return this.$store.state.category;
+    },
+    tagsList() {
+      return this.$store.state.tagsList;
+    },
   },
   methods: {
     randomSize() {
@@ -100,6 +105,9 @@ export default {
     },
     randomColor() {
       return '#'+Math.floor(Math.random()*0xffffff).toString(16);
+    },
+    openFriend(url) {
+      window.open(url, '_blank');
     },
   },
 };
@@ -261,13 +269,40 @@ export default {
 
 .tabContent {
   padding: 10px;
+  .title {
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+    margin-top: 14px;
+    margin-bottom: 14px;
+    span {
+      margin-left: 8px;
+    }
+  }
+  .category {
+    color: #F3E5E5;
+    list-style-type: disc;
+    padding-left: 20px;
+    li {
+      margin-bottom: 10px;
+    }
+    span {
+      display: inline-block;
+      text-decoration: underline;
+      cursor: pointer;
+      transition: all 0.3s;
+      &:hover {
+        color: #ffffff;
+      }
+    }
+  }
   .tag {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     > li {
       color: #fff;
-      opacity: 0.7;
+      opacity: 0.8;
       padding: 2px 6px 3px;
       margin: 2px;
       cursor: pointer;

@@ -5,7 +5,7 @@
         <li v-for="archive in list">
           <h3 :class="s.year">{{ archive.year }}</h3>
           <ul :class="s.articles">
-            <li v-for="article in archive.articles">
+            <li v-for="article in archive.articles" @click="$router.push({ path: `/post/${article._id}`})">
               <h4>{{ article.title }}</h4>
             </li>
           </ul>
@@ -20,46 +20,23 @@
 import sidebar from '~/components/sidebar';
 
 export default {
+  async asyncData ({ $axios }) {
+    const data = await $axios.$get('blog/archives');
+    if (data) {
+      return {
+        list: data,
+      };
+    }
+  },
+  async fetch ({ store }) {
+    await store.dispatch('loadSideBarData');
+  },
   components: {
     sidebar,
   },
   data() {
     return {
-      list: [
-        {
-          year: 2018,
-          articles: [
-            {
-              title: '测试文章1',
-            },
-            {
-              title: '测试文章2',
-            },
-          ],
-        },
-        {
-          year: 2017,
-          articles: [
-            {
-              title: '制作一个不轻量的hexo主题:cube ',
-            },
-            {
-              title: 'xampp + phpstorm的简单配置 ',
-            },
-          ],
-        },
-        {
-          year: 2016,
-          articles: [
-            {
-              title: '某crackme破解 ',
-            },
-            {
-              title: 'javascript函数化构造器 ',
-            },
-          ],
-        },
-      ],
+      list: [],
     };
   },
 };

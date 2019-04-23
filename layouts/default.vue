@@ -13,10 +13,10 @@
     </transition>
     <div :class="[s.menu, showMenu ? s.open : s.close]" :style="{ top: `${menuTop}px`, left: `${menuLeft}px`}" v-clickoutside="closeMenu">
       <ul :class="s.menuList">
-        <li style="left: 50%; top: 15%;">首页</li>
+        <li style="left: 50%; top: 15%;" @click="goHome">首页</li>
         <li style="left: 80.3109%; top: 32.5%;">下一页</li>
-        <li style="left: 80.3109%; top: 67.5%;">归档</li>
-        <li style="left: 50%; top: 85%;">关于</li>
+        <li style="left: 80.3109%; top: 67.5%;" @click="goArchives">归档</li>
+        <li style="left: 50%; top: 85%;" @click="goAbout">关于</li>
         <li style="left: 19.6891%; top: 67.5%;">留言板</li>
         <li style="left: 19.6891%; top: 32.5%;">上一页</li>
       </ul>
@@ -84,6 +84,18 @@ export default {
     },
     closeMenu() {
       this.showMenu = false;
+    },
+    goHome() {
+      this.$router.push({ path: '/' });
+      this.closeMenu();
+    },
+    goArchives() {
+      this.$router.push({ path: '/archives' });
+      this.closeMenu();
+    },
+    goAbout() {
+      this.$router.push({ path: '/about' });
+      this.closeMenu();
     },
   },
 };

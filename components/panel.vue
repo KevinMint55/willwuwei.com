@@ -1,6 +1,6 @@
 <template>
-  <transition name="fade">
-    <aside :class="s.panel" v-show="showPanel" v-visible="{ className: s.animate }">
+  <transition name="slide-right">
+    <aside v-if="showPanel" :class="s.panel" v-visible="{ className: s.animate }">
       <div :class="s.panelHeading">
         <div>
           <i :class="iconClass"></i>

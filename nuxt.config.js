@@ -49,7 +49,7 @@ module.exports = {
       src: '~/plugins/visible',
     },
     {
-      src: '~/plugins/axios',
+      src: '~/plugins/$axios',
     },
     {
       src: '~/plugins/utils',
