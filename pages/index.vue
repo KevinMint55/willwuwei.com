@@ -17,8 +17,10 @@ export default {
   async fetch ({ store }) {
     return Promise.all([
       store.dispatch('loadSideBarData'),
-      store.dispatch('getArticles'),
-    ])
+      store.dispatch('getArticles', {
+        pageCurrent: 1,
+      }),
+    ]);
   },
   data() {
     return {

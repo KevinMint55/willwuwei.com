@@ -25,10 +25,14 @@
       </figure>
       <div v-html="post.content" class="blog-content" v-if="post.editorType === 'richtext'"></div>
       <div v-html="compiledMarkdown" class="markdown-body" v-if="post.editorType === 'markdown'"></div>
+      <div :class="s.comment">
+        <div id="SOHUCS" :sid="$route.path"></div>
+      </div>
     </div>
   </div>
 </template>
 
+<script id="cy_cmt_num" src='https://changyan.sohu.com/upload/plugins/plugins.list.count.js?clientId=cytx60lk0'></script>
 <script>
 import marked from 'marked';
 import hljs from 'highlight.js';
@@ -49,7 +53,7 @@ marked.setOptions({
 });
 
 export default {
-  async asyncData ({ $axios, params }) {
+  async asyncData({ $axios, params }) {
     const post = await $axios.$get('blog/details', {
       params: {
         id: params.id,
@@ -69,7 +73,48 @@ export default {
       return marked(this.post.content, { sanitize: true });
     },
   },
+  mounted() {
+    this.initComment();
+  },
   methods: {
+    initComment() {
+      const appid = 'cytx60lk0';
+      const conf = 'prod_23b83f89193056901ef06333830d17ae';
+      const width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+        window.document.write(
+          '<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' +
+          appid + '&conf=' + conf + '"><\/script>');
+      } else {
+        const loadJs = function (d, a) {
+          const c = document.getElementsByTagName("head")[0] || document.head || document.documentElement;
+          const b = document.createElement("script");
+          b.setAttribute("type", "text/javascript");
+          b.setAttribute("charset", "UTF-8");
+          b.setAttribute("src", d);
+          if (typeof a === "function") {
+            if (window.attachEvent) {
+              b.onreadystatechange = function () {
+                const e = b.readyState;
+                if (e === "loaded" || e === "complete") {
+                  b.onreadystatechange = null;
+                  a()
+                }
+              }
+            } else {
+              b.onload = a
+            }
+          }
+          c.appendChild(b)
+        };
+        loadJs("https://changyan.sohu.com/upload/changyan.js", function () {
+          window.changyan.api.config({
+            appid,
+            conf,
+          })
+        });
+      }
+    },
   },
 };
 </script>
@@ -95,14 +140,14 @@ export default {
   justify-content: center;
   margin: 20px;
   > span {
-    background-color: rgba(10,10,0,0.7);
+    background-color: rgba(10, 10, 0, 0.7);
     margin-right: 6px;
     color: #fff;
-    padding: .3em .6em;
-    border-radius: .25em;
+    padding: 0.3em 0.6em;
+    border-radius: 0.25em;
     font-size: 12px;
     cursor: pointer;
-    transition: all .3s ease-in-out;
+    transition: all 0.3s ease-in-out;
     i {
       margin-right: 2px;
       vertical-align: text-top;

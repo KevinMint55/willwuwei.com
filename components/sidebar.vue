@@ -2,8 +2,8 @@
   <div :class="s.sidebar">
     <aside :class="s.search" v-visible="{ className: s.animate }">
       <form :class="s.searchForm">
-        <input type="text" placeholder="搜索文章~" :class="s.searchInput">
-        <button :class="s.searchBtn" type="submit">
+        <input type="text" placeholder="搜索文章~" :class="s.searchInput" v-model="searchContent" @keydown.enter.prevent="$router.push({ name: 'search-content-num', params: { content: searchContent }})">
+        <button :class="s.searchBtn" @click.prevent="$router.push({ name: 'search-content-num', params: { content: searchContent }})">
           <i class="km km-search_light"></i>
         </button>
       </form>
@@ -17,8 +17,8 @@
     </aside>
     <panel icon-class="km km-hot" name="最热文章">
       <ul>
-        <li v-for="post in hotList" :class="s.post">
-          <span :class="s.name" @click="$router.push({ path: `/post/${post._id}` })">{{ post.title }}</span>
+        <li v-for="post in hotList" :class="s.post" @click="$router.push({ path: `/post/${post._id}` })">
+          <span :class="s.name">{{ post.title }}</span>
           <span :class="s.views">{{ post.PV }}°C</span>
         </li>
       </ul>
@@ -35,7 +35,10 @@
               <span>分类</span>
             </p>
             <ul :class="s.category">
-              <li v-for="item in category">
+              <li
+                v-for="item in category"
+                :key="item.name"
+                @click="$router.push({ name: 'category-name-num', params: { name: item.name }})">
                 <span>{{ item.name }}</span>
                 <i>（{{ item.count }}）</i>
               </li>
@@ -45,7 +48,16 @@
               <span>标签</span>
             </p>
             <ul :class="s.tag">
-              <li v-for="item in tagsList" :style="{ fontSize: `${randomSize()}px`, backgroundColor: randomColor() }">{{ item.name }}（{{ item.count }}）</li>
+              <li
+                v-for="item in tagsList"
+                :style="{
+                  fontSize: `${randomSize()}px`,
+                  backgroundColor: randomColor()
+                }"
+                :key="item.name"
+                @click="$router.push({ name: 'tag-name-num', params: { name: item.name }})">
+                {{ item.name }}（{{ item.count }}）
+              </li>
             </ul>
           </div>
           <ul :class="s.url" v-if="curTab === '友情链接'" key="友情链接">
@@ -86,6 +98,7 @@ export default {
           url: 'https://github.com/KevinMint55',
         },
       ],
+      searchContent: '',
     };
   },
   computed: {
@@ -220,12 +233,9 @@ export default {
   background-color: rgba(230,238,232,0.3);
   transition: all .5s ease-in-out;
   font-size: 12px;
+  cursor: pointer;
   .name {
     color: #fff;
-    cursor: pointer;
-    &:hover {
-      color: #b94a48;
-    }
   }
   .views {
     display: inline-block;
@@ -274,7 +284,7 @@ export default {
     align-items: center;
     color: #ffffff;
     margin-top: 14px;
-    margin-bottom: 14px;
+    margin-bottom: 8px;
     span {
       margin-left: 8px;
     }

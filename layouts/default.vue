@@ -14,11 +14,11 @@
     <div :class="[s.menu, showMenu ? s.open : s.close]" :style="{ top: `${menuTop}px`, left: `${menuLeft}px`}" v-clickoutside="closeMenu">
       <ul :class="s.menuList">
         <li style="left: 50%; top: 15%;" @click="goHome">首页</li>
-        <li style="left: 80.3109%; top: 32.5%;">下一页</li>
+        <li style="left: 80.3109%; top: 32.5%;" @click="turnPage(1)">下一页</li>
         <li style="left: 80.3109%; top: 67.5%;" @click="goArchives">归档</li>
         <li style="left: 50%; top: 85%;" @click="goAbout">关于</li>
         <li style="left: 19.6891%; top: 67.5%;">留言板</li>
-        <li style="left: 19.6891%; top: 32.5%;">上一页</li>
+        <li style="left: 19.6891%; top: 32.5%;" @click="turnPage(-1)">上一页</li>
       </ul>
     </div>
     <div ref="nest"></div>
@@ -96,6 +96,31 @@ export default {
     goAbout() {
       this.$router.push({ path: '/about' });
       this.closeMenu();
+    },
+    turnPage(val) {
+      this.closeMenu();
+      if (val === -1) {
+        if (!this.$route.params.num) {
+          return;
+        } else {
+          if (this.$route.params.num === 2 && this.$route.name === 'page-num') {
+            this.$router.push('/');
+            return;
+          }
+          const params = { ...this.$route.params, num: this.$route.params.num - 1 };
+          this.$router.push({ name: this.$route.name, params });
+        }
+      } else {
+        if (this.$route.name === 'index') {
+          this.$router.push({ name: 'page-num', params: { num: 2 }});
+          return;
+        }
+        if (this.$route.name.includes('num')) {
+          const curPage = this.$route.params.num || 1;
+          const params = { ...this.$route.params, num: curPage + 1 };
+          this.$router.push({ name: this.$route.name, params });
+        }
+      }
     },
   },
 };

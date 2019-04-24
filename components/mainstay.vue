@@ -34,7 +34,7 @@
           </span>
         </div>
         <div :class="s.content">
-          <div :class="s.item">
+          <div :class="s.item" @click="$router.push({ path: `/post/${article._id}` })">
             <div :class="s.img">
               <img :src="$utils.setCdn(article.cover)" alt="">
             </div>
@@ -46,7 +46,7 @@
         <div :class="[s.mobile, s.info]">
           {{ article.description }}
         </div>
-        <div :class="[s.mobile, s.read]">
+        <div :class="[s.mobile, s.read]" @click="$router.push({ path: `/post/${article._id}` })">
           阅读全文
         </div>
       </li>
@@ -92,11 +92,16 @@ export default {
   },
   methods: {
     turnPage(page) {
-      if (page === 1) {
+      if (this.$route.name === 'index') {
+        this.$router.push({ name: 'page-num', params: { num: page }});
+        return;
+      }
+      if (page === 1 && this.$route.name === 'page-num') {
         this.$router.push('/');
         return;
       }
-      this.$router.push(`/page/${page}`);
+      const params = { ...this.$route.params, num: page };
+      this.$router.push({ name: this.$route.name, params });
     },
   },
   filters: {

@@ -19,6 +19,7 @@ export default {
       store.dispatch('loadSideBarData'),
       store.dispatch('getArticles', {
         pageCurrent: params.num,
+        category: params.name,
       }),
     ])
   },

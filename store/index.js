@@ -49,10 +49,13 @@ export const actions = {
     const data = await service.get('blog/tags');
     commit('setTagsList', data);
   },
-  async getArticles({ commit }, pageCurrent) {
+  async getArticles({ commit }, { pageCurrent, category, tag, searchContent }) {
     const data = await service.get('blog', {
       params: {
         pageCurrent,
+        category,
+        tag,
+        searchContent,
       },
     });
     commit('setArticles', data);
