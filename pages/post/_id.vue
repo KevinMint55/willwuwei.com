@@ -8,6 +8,10 @@
           </div>
           <div :class="s.tag">
             <div>
+              <i class="km km-apps"></i>
+              <span>{{ post.category }}</span>
+            </div>
+            <div>
               <i class="km km-tags"></i>
               <span>{{ post.tags.toString() }}</span>
             </div>
@@ -175,8 +179,10 @@ export default {
     transform: perspective(2500px) rotateX(0);
   }
   .tag {
+    flex-direction: column;
     margin: 5px;
     > div {
+      margin-right: 0;
       background-color: transparent;
       &:hover {
         background-color: transparent;
