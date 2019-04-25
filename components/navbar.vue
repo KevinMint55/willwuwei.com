@@ -35,6 +35,16 @@ export default {
           path: '/archives',
         },
         {
+          name: '实验室',
+          icon: 'km-lab',
+          path: '/lab',
+        },
+        {
+          name: '留言板',
+          icon: 'km-guestbook',
+          path: '/messageBoard',
+        },
+        {
           name: '关于我',
           icon: 'km-about',
           path: '/about',
@@ -89,7 +99,7 @@ export default {
     cursor: pointer;
     transition: all .25s ease-in-out;
     > i {
-      margin-right: 2px;
+      margin-right: 6px;
     }
     &.current {
       background-color: rgba(138,43,226,0.7);

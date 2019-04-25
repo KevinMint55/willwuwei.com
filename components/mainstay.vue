@@ -214,20 +214,22 @@ export default {
   justify-content: center;
   margin: 20px;
   > span {
-    background-color: rgba(10,10,0,0.7);
-    margin-right: 6px;
     color: #fff;
     padding: .3em .6em;
     border-radius: .25em;
     font-size: 12px;
-    cursor: pointer;
     transition: all .3s ease-in-out;
+    background-color: rgba(10,10,0,0.7);
+    cursor: default;
     i {
       margin-right: 2px;
       vertical-align: text-top;
     }
     &:hover {
       background-color: #d9534f;
+    }
+    &:not(:last-child) {
+      margin-right: 6px;
     }
   }
 }

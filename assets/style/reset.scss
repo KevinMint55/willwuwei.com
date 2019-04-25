@@ -1,6 +1,7 @@
 @import './media.scss',
 './transition.scss',
-'./richtext.scss';
+'./richtext.scss',
+'./iconfont.scss';
 
 body,
 ul,
@@ -114,7 +115,7 @@ ul {
   flex-wrap: wrap;
   padding-top: 30px;
   padding-left: 15px;
-  padding-top: 15px;
+  padding-right: 15px;
 }
 
 .mainstay {
@@ -122,8 +123,15 @@ ul {
   padding: 0 15px;
 }
 
+.mainstayWrapper {
+  width: 66%;
+}
+
 @media (max-width: 1040px) {
   .mainstay {
+    width: 100%;
+  }
+  .mainstayWrapper {
     width: 100%;
   }
 }

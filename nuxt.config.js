@@ -31,9 +31,6 @@ module.exports = {
   },
   css: [
     {
-      src: '~assets/font/iconfont.css',
-    },
-    {
       src: '~assets/style/reset.scss',
       lang: 'scss',
     },

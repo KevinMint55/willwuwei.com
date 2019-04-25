@@ -13,11 +13,11 @@
     </transition>
     <div :class="[s.menu, showMenu ? s.open : s.close]" :style="{ top: `${menuTop}px`, left: `${menuLeft}px`}" v-clickoutside="closeMenu">
       <ul :class="s.menuList">
-        <li style="left: 50%; top: 15%;" @click="goHome">首页</li>
+        <li style="left: 50%; top: 15%;" @click="jumpMenu('/')">首页</li>
         <li style="left: 80.3109%; top: 32.5%;" @click="turnPage(1)">下一页</li>
-        <li style="left: 80.3109%; top: 67.5%;" @click="goArchives">归档</li>
-        <li style="left: 50%; top: 85%;" @click="goAbout">关于</li>
-        <li style="left: 19.6891%; top: 67.5%;">留言板</li>
+        <li style="left: 80.3109%; top: 67.5%;" @click="jumpMenu('/archives')">归档</li>
+        <li style="left: 50%; top: 85%;" @click="jumpMenu('/about')">关于</li>
+        <li style="left: 19.6891%; top: 67.5%;" @click="jumpMenu('/messageBoard')">留言板</li>
         <li style="left: 19.6891%; top: 32.5%;" @click="turnPage(-1)">上一页</li>
       </ul>
     </div>
@@ -26,7 +26,6 @@
   </div>
 </template>
 
-<script id="cy_cmt_num" src='https://changyan.sohu.com/upload/plugins/plugins.list.count.js?clientId=cytx60lk0'></script>
 <script>
 import navbar from '~/components/navbar.vue';
 import Star from '~/plugins/star';
@@ -76,6 +75,7 @@ export default {
         }
       };
     },
+    
     backToTop() {
       const currentScroll = this.$refs.app.scrollTop;
       if (currentScroll > 0) {
@@ -86,16 +86,8 @@ export default {
     closeMenu() {
       this.showMenu = false;
     },
-    goHome() {
-      this.$router.push({ path: '/' });
-      this.closeMenu();
-    },
-    goArchives() {
-      this.$router.push({ path: '/archives' });
-      this.closeMenu();
-    },
-    goAbout() {
-      this.$router.push({ path: '/about' });
+    jumpMenu(path) {
+      this.$router.push({ path });
       this.closeMenu();
     },
     turnPage(val) {
@@ -137,6 +129,8 @@ export default {
 }
 
 .copyright {
+  position: relative;
+  z-index: 10;
   display: block;
   text-align: center;
   color: #eee;
@@ -163,6 +157,7 @@ export default {
 
 .backToTop {
   position: fixed;
+  z-index: 13;
   bottom: 20px;
   right: 20px;
   display: flex;
@@ -175,7 +170,6 @@ export default {
   border-radius: 50%;
   border: 2px solid #fff;
   cursor: pointer;
-  z-index: 2;
   &:hover {
     color: #d9534f;
     border-color: #d9534f;
@@ -186,7 +180,7 @@ export default {
 .menu {
   position: fixed;
   transition: all .4s;
-  z-index: 3;
+  z-index: 11;
   &.open {
     opacity: 1;
     .menuList {
@@ -204,11 +198,13 @@ export default {
 
 .menuList {
   position: relative;
+  z-index: 11;
   width: 300px;
   height: 300px;
   transition: all .4s ease-out;
   > li {
     position: absolute;
+    z-index: 11;
     display: flex;
     justify-content: center;
     align-items: center;

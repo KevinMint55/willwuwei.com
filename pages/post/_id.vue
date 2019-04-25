@@ -77,46 +77,7 @@ export default {
   },
   methods: {
     initComment() {
-      const appid = 'cytx60lk0';
-      const conf = 'prod_23b83f89193056901ef06333830d17ae';
-      const width = window.innerWidth || document.documentElement.clientWidth;
-      if (width < 960) {
-        const c = document.getElementsByTagName("head")[0] || document.head || document.documentElement;
-        const b = document.createElement("script");
-        b.setAttribute("id", "changyan_mobile_js");
-        b.setAttribute("type", "text/javascript");
-        b.setAttribute("charset", "UTF-8");
-        b.setAttribute("src", `https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=${appid}&conf=${conf}><\/script>`);
-        c.appendChild(b);
-      } else {
-        const loadJs = function (d, a) {
-          const c = document.getElementsByTagName("head")[0] || document.head || document.documentElement;
-          const b = document.createElement("script");
-          b.setAttribute("type", "text/javascript");
-          b.setAttribute("charset", "UTF-8");
-          b.setAttribute("src", d);
-          if (typeof a === "function") {
-            if (window.attachEvent) {
-              b.onreadystatechange = function () {
-                const e = b.readyState;
-                if (e === "loaded" || e === "complete") {
-                  b.onreadystatechange = null;
-                  a()
-                }
-              }
-            } else {
-              b.onload = a
-            }
-          }
-          c.appendChild(b)
-        };
-        loadJs("https://changyan.sohu.com/upload/changyan.js", function () {
-          window.changyan.api.config({
-            appid,
-            conf,
-          })
-        });
-      }
+      this.$utils.initComment();
     },
   },
 };

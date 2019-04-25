@@ -135,7 +135,6 @@ export default {
 .search {
   margin-bottom: 20px;
   border-radius: 4px;
-  padding: 8px;
   background-color: rgba(10,10,0,0.7);
 
   transform: translateY(100px);
@@ -154,7 +153,7 @@ export default {
 
 .searchInput {
   flex: auto;
-  margin-right: 15px;
+  margin-right: 10px;
   box-shadow: inset 0 1px 1px rgba(0,0,0,0.075), 0 0 8px rgba(238,88,83,0.6);
   height: 34px;
   padding: 6px 12px;
