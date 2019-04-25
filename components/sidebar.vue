@@ -12,7 +12,7 @@
       <div :class="s.authorName">KEVINMINT</div>
       <div :class="s.authorInfo">
         <img src="../assets/images/avatar.jpg" alt="">
-        <p>不会旅游的摄影师不是好程序员</p>
+        <p>不想旅行的程序员不是好摄影师</p>
       </div>
     </aside>
     <panel icon-class="km km-hot" name="最热文章">

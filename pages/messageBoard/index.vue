@@ -43,7 +43,6 @@ export default {
   background-color: rgba(230,238,232,0.5);
   box-shadow: 0 0 8px black;
   border-radius: 4px;
-  margin: 0 15px;
   padding: 15px;
   margin-bottom: 20px;
   h3 {
@@ -62,8 +61,8 @@ export default {
 
 .comment {
   background-color: #fff;
-  margin: 0 15px;
   padding: 15px;
   border-radius: 4px;
+  margin-bottom: 20px;
 }
 </style>
