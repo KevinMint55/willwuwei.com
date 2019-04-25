@@ -4,9 +4,9 @@
       <div :class="s.content">
         <h3>留言板</h3>
         <h4>(＾Ｕ＾)ノ~ＹＯ</h4>
-        <div :class="s.comment">
-          <div id="SOHUCS" :sid="$route.path"></div>
-        </div>
+      </div>
+      <div :class="s.comment">
+        <div id="SOHUCS" :sid="$route.path"></div>
       </div>
     </div>
     <sidebar></sidebar>
@@ -45,21 +45,23 @@ export default {
   border-radius: 4px;
   margin: 0 15px;
   padding: 15px;
+  margin-bottom: 20px;
   h3 {
     font-size: 32px;
     color: #fff;
     text-align: center;
-    margin-bottom: 4px;
+    margin-bottom: 8px;
   }
   h4 {
     font-size: 16px;
     color: #fff;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 4px;
   }
 }
 
 .comment {
   background-color: #fff;
+  margin: 0 15px;
 }
 </style>
