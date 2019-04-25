@@ -58,4 +58,8 @@ export default {
     margin-bottom: 20px;
   }
 }
+
+.comment {
+  background-color: #fff;
+}
 </style>

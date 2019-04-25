@@ -8,6 +8,7 @@ export const state = () => ({
     list: [],
     pageCurrent: 1,
     count: 0,
+    pageNumber: 1,
   },
 })
 

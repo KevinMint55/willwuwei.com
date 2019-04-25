@@ -21,6 +21,10 @@
         </div>
         <div :class="s.tag">
           <span>
+            <i class="km km-apps"></i>
+            {{ article.category }}
+          </span>
+          <span>
             <i class="km km-tags"></i>
             {{ article.tags.toString() }}
           </span>
@@ -28,10 +32,10 @@
             <i class="km km-eye"></i>
             {{ article.PV }}°C
           </span>
-          <span>
+          <!-- <span>
             <i class="km km-guestbook"></i>
             {{ article.comments || 0 }}
-          </span>
+          </span> -->
         </div>
         <div :class="s.content">
           <div :class="s.item" @click="$router.push({ path: `/post/${article._id}` })">

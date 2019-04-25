@@ -42,6 +42,11 @@ export default {
       menuLeft: 0,
     };
   },
+  computed: {
+    pageNumber() {
+      return this.$store.state.articles.pageNumber;
+    },
+  },
   mounted() {
     this.$refs.app.addEventListener('scroll', () => {
       if (this.$refs.app.scrollTop > 100) {
@@ -104,12 +109,13 @@ export default {
           this.$router.push({ name: this.$route.name, params });
         }
       } else {
+        const curPage = this.$route.params.num || 1;
+        if (curPage + 1 > this.pageNumber) return;
         if (this.$route.name === 'index') {
           this.$router.push({ name: 'page-num', params: { num: 2 }});
           return;
         }
         if (this.$route.name.includes('num')) {
-          const curPage = this.$route.params.num || 1;
           const params = { ...this.$route.params, num: curPage + 1 };
           this.$router.push({ name: this.$route.name, params });
         }
