@@ -63,5 +63,7 @@ export default {
 .comment {
   background-color: #fff;
   margin: 0 15px;
+  padding: 15px;
+  border-radius: 4px;
 }
 </style>
