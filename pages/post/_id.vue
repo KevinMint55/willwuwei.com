@@ -81,6 +81,7 @@ export default {
       const appid = 'cytx60lk0';
       const conf = 'prod_23b83f89193056901ef06333830d17ae';
       const width = window.innerWidth || document.documentElement.clientWidth;
+      console.log('window', window);
       if (width < 960) {
         window.document.write(
           '<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' +
