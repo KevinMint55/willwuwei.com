@@ -52,6 +52,7 @@ marked.setOptions({
 });
 
 export default {
+  scrollToTop: true,
   async asyncData({ $axios, params }) {
     const post = await $axios.$get('blog/details', {
       params: {
@@ -124,9 +125,10 @@ export default {
 
 .cover {
   width: 100%;
+  text-align: center;
+  margin-bottom: 10px;
   img {
-    width: 100%;
-    height: 100%;
+    max-height: 200px;
     object-fit: contain;
   }
 }

@@ -58,6 +58,13 @@ export default {
     this.initRightMenu();
     this.initStar(this.$refs.star);
   },
+  watch: {
+    '$route'() {
+      if (this.$route.name === 'post-id') {
+        this.backToTop();
+      }
+    },
+  },
   mixins: [Star],
   methods: {
     initRightMenu() {
@@ -80,7 +87,6 @@ export default {
         }
       };
     },
-    
     backToTop() {
       const currentScroll = this.$refs.app.scrollTop;
       if (currentScroll > 0) {
@@ -156,7 +162,7 @@ export default {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: calc(100% - 8px);
   height: 100%;
   z-index: 1;
 }
