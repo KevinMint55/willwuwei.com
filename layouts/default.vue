@@ -26,6 +26,7 @@
   </div>
 </template>
 
+<script id="cy_cmt_num" src='https://changyan.sohu.com/upload/plugins/plugins.list.count.js?clientId=cytx60lk0'></script>
 <script>
 import navbar from '~/components/navbar.vue';
 import Star from '~/plugins/star';

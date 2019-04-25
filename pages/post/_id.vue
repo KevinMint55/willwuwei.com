@@ -32,7 +32,6 @@
   </div>
 </template>
 
-<script id="cy_cmt_num" src='https://changyan.sohu.com/upload/plugins/plugins.list.count.js?clientId=cytx60lk0'></script>
 <script>
 import marked from 'marked';
 import hljs from 'highlight.js';
@@ -78,6 +77,7 @@ export default {
   },
   methods: {
     initComment() {
+      console.log('init');
       const appid = 'cytx60lk0';
       const conf = 'prod_23b83f89193056901ef06333830d17ae';
       const width = window.innerWidth || document.documentElement.clientWidth;
