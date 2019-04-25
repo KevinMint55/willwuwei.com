@@ -99,6 +99,7 @@ export default {
   justify-content: center;
   align-items: center;
   height: 40vh;
+  margin-bottom: 20px;
   &::after {
     content: '';
     position: absolute;
