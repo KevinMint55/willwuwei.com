@@ -2,27 +2,29 @@
   <div class="container view">
     <div :class="s.blog">
       <div :class="s.info">
-        <div :class="s.title">
-          <h3>{{ post.title }}</h3>
+        <div :class="s.intro">
+          <div :class="s.title">
+            <h3>{{ post.title }}</h3>
+          </div>
+          <div :class="s.tag">
+            <div>
+              <i class="km km-tags"></i>
+              <span>{{ post.tags.toString() }}</span>
+            </div>
+            <div>
+              <i class="km km-calendar"></i>
+              <span>{{ $utils.formatDate(post.showDate, 'yyyy-MM-dd') }}</span>
+            </div>
+            <div>
+              <i class="km km-eye"></i>
+              <span>{{ post.PV }}°C</span>
+            </div>
+          </div>
         </div>
-        <div :class="s.tag">
-          <span>
-            <i class="km km-tags"></i>
-            {{ post.tags.toString() }}
-          </span>
-          <span>
-            <i class="km km-calendar"></i>
-            {{ $utils.formatDate(post.showDate, 'yyyy-MM-dd') }}
-          </span>
-          <span>
-            <i class="km km-eye"></i>
-            {{ post.PV }}°C
-          </span>
-        </div>
+        <figure :class="s.cover">
+          <img :src="$utils.setCdn(post.cover)" alt="">
+        </figure>
       </div>
-      <figure :class="s.cover">
-        <img :src="$utils.setCdn(post.cover)" alt="">
-      </figure>
       <div v-html="post.content" class="blog-content" v-if="post.editorType === 'richtext'"></div>
       <div v-html="compiledMarkdown" class="markdown-body" v-if="post.editorType === 'markdown'"></div>
       <div :class="s.comment">
@@ -91,12 +93,36 @@ export default {
   padding: 10px;
 }
 
+.info {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40vh;
+  &::after {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+}
+
+.intro {
+  position: relative;
+  z-index: 3;
+}
+
 .title {
   display: flex;
   justify-content: center;
   h3 {
-    font-size: 24px;
-    color: #3d4450;
+    font-size: 32px;
+    color: #ffffff;
   }
 }
 
@@ -104,32 +130,39 @@ export default {
   display: flex;
   justify-content: center;
   margin: 20px;
-  > span {
-    background-color: rgba(10, 10, 0, 0.7);
-    margin-right: 6px;
+  > div {
+    display: flex;
+    align-items: center;
     color: #fff;
-    padding: 0.3em 0.6em;
+    padding: 0.3em 0.7em;
     border-radius: 0.25em;
-    font-size: 12px;
+    font-size: 14px;
     cursor: pointer;
+    background-color: rgba(230,238,232,0.5);
     transition: all 0.3s ease-in-out;
     i {
-      margin-right: 2px;
-      vertical-align: text-top;
+      margin-right: 8px;
     }
     &:hover {
       background-color: #d9534f;
+    }
+    &:not(:last-child) {
+      margin-right: 8px;
     }
   }
 }
 
 .cover {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
   width: 100%;
-  text-align: center;
-  margin-bottom: 10px;
+  height: 100%;
   img {
-    max-height: 200px;
-    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 }
 
@@ -142,8 +175,7 @@ export default {
   }
   .tag {
     margin: 5px;
-    > span {
-      color: #3d4450;
+    > div {
       background-color: transparent;
       &:hover {
         background-color: transparent;
