@@ -127,6 +127,12 @@ ul {
   width: 66%;
 }
 
+.markdown-body {
+  ul {
+    list-style-type: disc;
+  }
+}
+
 @media (max-width: 1040px) {
   .mainstay {
     width: 100%;
