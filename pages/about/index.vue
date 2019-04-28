@@ -45,6 +45,11 @@ export default {
       this.showWechat = false;
     },
   },
+  head() {
+    return {
+      title: '关于我',
+    };
+  },
 };
 </script>
 

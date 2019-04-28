@@ -14,6 +14,11 @@ module.exports = {
         name: 'description',
         content: 'KevinMintBlog',
       },
+      {
+        hid: 'keywords',
+        name: 'keywords',
+        content: 'KevinMint, Vue开发者, 前端技术开发, javascript技术',
+      },
     ],
     link: [
       {

@@ -26,6 +26,11 @@ export default {
     return {
     };
   },
+  head() {
+    return {
+      title: 'Welcome to my blog',
+    };
+  },
 };
 </script>
 

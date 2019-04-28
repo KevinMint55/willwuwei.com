@@ -39,6 +39,11 @@ export default {
       list: [],
     };
   },
+  head() {
+    return {
+      title: '归档',
+    };
+  },
 };
 </script>
 

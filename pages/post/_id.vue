@@ -74,6 +74,11 @@ export default {
       post: {},
     };
   },
+  head() {
+    return {
+      title: this.post.title,
+    };
+  },
   computed: {
     compiledMarkdown() {
       return marked(this.post.content, { sanitize: true });

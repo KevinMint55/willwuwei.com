@@ -14,7 +14,7 @@ export default {
     mainstay,
     sidebar,
   },
-  async fetch ({ store }) {
+  async fetch({ store }) {
     return Promise.all([
       store.dispatch('loadSideBarData'),
       store.dispatch('getArticles', {
@@ -24,6 +24,11 @@ export default {
   },
   data() {
     return {
+    };
+  },
+  head() {
+    return {
+      title: 'Welcome to my blog',
     };
   },
 };

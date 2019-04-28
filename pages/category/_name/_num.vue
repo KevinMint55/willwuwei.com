@@ -37,6 +37,11 @@ export default {
     return {
     };
   },
+  head() {
+    return {
+      title: `分类 > ${this.$route.params.name}`,
+    };
+  },
 };
 </script>
 

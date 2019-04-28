@@ -53,6 +53,11 @@ export default {
       window.open(path, '_blank');
     },
   },
+  head() {
+    return {
+      title: '实验室',
+    };
+  },
 };
 </script>
 

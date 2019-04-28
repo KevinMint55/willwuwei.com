@@ -37,6 +37,11 @@ export default {
     return {
     };
   },
+  head() {
+    return {
+      title: `标签 > ${this.$route.params.name}`,
+    };
+  },
 };
 </script>
 

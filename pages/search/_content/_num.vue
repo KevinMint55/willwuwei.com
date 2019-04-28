@@ -37,6 +37,11 @@ export default {
     return {
     };
   },
+  head() {
+    return {
+      title: `搜索：${this.$route.params.content}`,
+    };
+  },
 };
 </script>
 

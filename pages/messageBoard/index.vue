@@ -35,6 +35,11 @@ export default {
       this.$utils.initComment();
     },
   },
+  head() {
+    return {
+      title: '留言板',
+    };
+  },
 };
 </script>
 

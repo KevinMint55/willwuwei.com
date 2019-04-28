@@ -33,10 +33,6 @@
             <i class="km km-eye"></i>
             {{ article.PV }}°C
           </span>
-          <!-- <span>
-            <i class="km km-guestbook"></i>
-            {{ article.comments || 0 }}
-          </span> -->
         </div>
         <div :class="s.content">
           <div :class="s.item" @click="$router.push({ path: `/post/${article._id}` })">
