@@ -131,6 +131,9 @@ ul {
   ul {
     list-style-type: disc;
   }
+  ol {
+    list-style-type: decimal;
+  }
 }
 
 @media (max-width: 1040px) {
