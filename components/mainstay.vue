@@ -8,6 +8,7 @@
     </div>
     <ul :class="s.articleList">
       <li :class="s.article" v-for="article in articleList" v-visible="{ className: s.animate }">
+        <div :class="[s.date, s.year]">{{ article.showDate | getYear }}年</div>
         <div :class="s.date">
           <div :class="s.month">{{ article.showDate | getMonth }}月</div>
           <div :class="s.day">{{ article.showDate | getDate }}</div>
@@ -109,6 +110,10 @@ export default {
     },
   },
   filters: {
+    getYear(val) {
+      const year = new Date(val).getFullYear();
+      return year;
+    },
     getMonth(val) {
       let month = new Date(val).getMonth() + 1;
       if (month < 10) {
@@ -184,9 +189,35 @@ export default {
   color: #fff;
   padding-top: 10px;
   text-align: center;
+  box-shadow: 0 2px 8px 4px rgba(255, 255, 255, .2);
   .day {
     font-size: 30px;
     margin-top: -5px;
+  }
+}
+
+.year {
+  width: 70px;
+  height: 24px;
+  line-height: 24px;
+  padding-top: 0;
+  top: 70px;
+  left: -12px;
+  border-radius: 0 4px 4px 0;
+  &::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-width: 6px;
+    border-style: solid;
+    border-top-color: rgba(255, 255, 255, .8);
+    border-right-color: rgba(255, 255, 255, .8);
+    border-bottom-color: transparent;
+    border-left-color: transparent;
   }
 }
 
@@ -324,6 +355,9 @@ export default {
 
 @media (max-width: 760px) {
   .date {
+    display: none;
+  }
+  .year {
     display: none;
   }
   .mobile {
