@@ -2,8 +2,8 @@
   <div :class="s.sidebar">
     <aside :class="s.search" v-visible="{ className: s.animate }">
       <form :class="s.searchForm">
-        <input type="text" placeholder="搜索文章~" :class="s.searchInput" v-model="searchContent" @keydown.enter.prevent="$router.push({ name: 'search-content-num', params: { content: searchContent }})">
-        <button :class="s.searchBtn" @click.prevent="$router.push({ name: 'search-content-num', params: { content: searchContent }})">
+        <input ref="search" type="text" placeholder="搜索文章~" :class="s.searchInput" v-model="searchContent" @keydown.enter.prevent="search">
+        <button :class="s.searchBtn" @click.prevent="search">
           <i class="km km-search_light"></i>
         </button>
       </form>
@@ -121,6 +121,13 @@ export default {
     },
     openFriend(url) {
       window.open(url, '_blank');
+    },
+    search() {
+      if (!this.searchContent) {
+        this.$refs.search.focus();
+        return;
+      }
+      this.$router.push({ name: 'search-content-num', params: { content: this.searchContent }});
     },
   },
 };
