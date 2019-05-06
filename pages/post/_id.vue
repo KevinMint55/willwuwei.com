@@ -32,6 +32,11 @@
       <div v-html="post.content" class="blog-content" v-if="post.editorType === 'richtext'"></div>
       <div v-html="compiledMarkdown" class="markdown-body" v-if="post.editorType === 'markdown'"></div>
       <div :class="s.comment">
+        <div class="ke-script" data-ke-script-attr="%20type%3D%22text/javascript%22%20charset%3D%22utf-8%22%20src%3D%22https%3A//changyan.itc.cn/js/lib/jquery.js%22">
+        </div>
+        <div class="ke-script" data-ke-script-attr="%20type%3D%22text/javascript%22%20charset%3D%22utf-8%22%20src%3D%22https%3A//changyan.sohu.com/js/changyan.labs.https.js%3Fappid%3Dcys0NKu99%22">
+        </div>
+        <style>#feedAv{ margin-top: -250px !important;transform: scale(0) !important;}</style>
         <div id="SOHUCS" :sid="$route.path"></div>
       </div>
     </div>
@@ -110,7 +115,7 @@ export default {
   height: 40vh;
   margin-bottom: 20px;
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     z-index: 2;
     top: 0;
@@ -148,7 +153,7 @@ export default {
     border-radius: 0.25em;
     font-size: 14px;
     cursor: pointer;
-    background-color: rgba(230,238,232,0.5);
+    background-color: rgba(230, 238, 232, 0.5);
     transition: all 0.3s ease-in-out;
     i {
       margin-right: 8px;
