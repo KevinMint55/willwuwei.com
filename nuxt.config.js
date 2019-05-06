@@ -1,6 +1,6 @@
 module.exports = {
   head: {
-    title: 'KevinMintBlog',
+    title: 'KevinMint - Done is better than perfect',
     meta: [
       {
         charset: 'utf-8',
@@ -12,13 +12,18 @@ module.exports = {
       {
         hid: 'description',
         name: 'description',
-        content: 'KevinMintBlog',
+        content: 'KevinMint',
       },
       {
         hid: 'keywords',
         name: 'keywords',
         content: 'KevinMint, Vue开发者, 前端技术开发, javascript技术',
       },
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'Done is better than perfect',
+      }
     ],
     link: [
       {
