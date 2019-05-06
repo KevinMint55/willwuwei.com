@@ -6,7 +6,6 @@
         <h4>(＾Ｕ＾)ノ~ＹＯ</h4>
       </div>
       <div :class="s.comment">
-        <div class="ke-script" data-ke-script-attr="%20type%3D%22text/javascript%22%20charset%3D%22utf-8%22%20src%3D%22https%3A//changyan.itc.cn/js/lib/jquery.js%22"></div><div class="ke-script" data-ke-script-attr="%20type%3D%22text/javascript%22%20charset%3D%22utf-8%22%20src%3D%22https%3A//changyan.sohu.com/js/changyan.labs.https.js%3Fappid%3Dcys0NKu99%22"></div><style>#feedAv{ margin-top: -250px !important;transform: scale(0) !important;}</style>
         <div id="SOHUCS" :sid="$route.path"></div>
       </div>
     </div>
