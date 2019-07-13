@@ -1,9 +1,14 @@
 {
-  "name": "my-blog",
+  "name": "kevinmint.com",
   "version": "1.0.0",
-  "description": "My blog",
+  "description": "kevinmint.com blog",
+  "author": {
+    "name": "KevinMint",
+    "email": "innovation55@foxmail.com",
+    "url": "https://www.kevinmint.com"
+  },
   "license": "MIT",
-  "author": "kevinmint <943642973@qq.com>",
+  "private": false,
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
