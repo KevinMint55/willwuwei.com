@@ -25,25 +25,25 @@ export default {
     return {
       list: [
         {
+          name: 'castle',
+          des: '使用vue-willtable组件开发的多人实时编辑表格系统',
+          icon: 'castle',
+          path: 'https://castle.kevinmint.com',
+          color: 'RGB(70,159,204)',
+        },
+        {
+          name: 'vue-willtable',
+          des: 'An editable table component for @vuejs',
+          icon: 'xinjianbiaoge',
+          path: 'https://demo.kevinmint.com/willtable',
+          color: 'rgb(141, 187, 57)',
+        },
+        {
           name: 'mini-games',
           des: '目前只支持五子棋人人对战与人机对战的小游戏平台',
           icon: 'youxi',
           path: 'http://mini.kevinmint.com',
           color: 'RGB(195,195,195)',
-        },
-        {
-          name: 'vue-editTable',
-          des: 'An editable table component for @vuejs',
-          icon: 'xinjianbiaoge',
-          path: 'https://demo.kevinmint.com/kmExcel',
-          color: 'rgb(141, 187, 57)',
-        },
-        {
-          name: 'castle',
-          des: '基于vue-editTable组件开发的多人实时编辑表格系统',
-          icon: 'castle',
-          path: 'https://castle.kevinmint.com',
-          color: 'RGB(70,159,204)',
         },
       ],
     };
