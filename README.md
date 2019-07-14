@@ -28,8 +28,8 @@ $ npm start
 
 ```
 
-	Blog                        
-	│
+Blog
+  │
   ├── assets                # 资源目录
   |
   ├── components            # 组件目录
@@ -50,8 +50,8 @@ $ npm start
   |
   ├── nuxt.config.js        # Nuxt配置文件
   │
-	├── package.json          # 项目配置
+  ├── package.json          # 项目配置
   │
-	└── yarn.lock             # 项目依赖版本控制
+  └── yarn.lock             # 项目依赖版本控制
 
 ```
