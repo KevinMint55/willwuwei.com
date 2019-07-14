@@ -60,11 +60,11 @@
               </li>
             </ul>
           </div>
-          <ul :class="s.url" v-if="curTab === '友情链接'" key="友情链接">
-            <li v-for="item in friends" @click="openFriend(item.url)">{{ item.name }}</li>
+          <ul v-if="curTab === '友情链接'" key="友情链接" :class="s.url">
+            <li v-for="item in friends" @click="openUrl(item.url)">{{ item.name }}</li>
           </ul>
-          <ul :class="s.url" v-if="curTab === '个人链接'" key="个人链接">
-            <li v-for="item in personal">{{ item.name }}</li>
+          <ul v-if="curTab === '个人链接'" key="个人链接" :class="s.url">
+            <li v-for="item in personal" @click="openUrl(item.url)">{{ item.name }}</li>
           </ul>
         </transition>
       </div>
@@ -119,7 +119,7 @@ export default {
     randomColor() {
       return '#'+Math.floor(Math.random()*0xffffff).toString(16);
     },
-    openFriend(url) {
+    openUrl(url) {
       window.open(url, '_blank');
     },
     search() {

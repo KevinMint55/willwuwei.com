@@ -29,8 +29,8 @@
           <img :src="$utils.setCdn(post.cover)" alt="">
         </figure>
       </div>
-      <div v-html="post.content" class="blog-content" v-if="post.editorType === 'richtext'"></div>
-      <div v-html="compiledMarkdown" class="markdown-body" v-if="post.editorType === 'markdown'"></div>
+      <div v-if="post.editorType === 'richtext'" v-html="post.content" class="blog-content"></div>
+      <div v-if="post.editorType === 'markdown'" v-html="compiledMarkdown" class="markdown-body"></div>
       <div :class="s.comment">
         <div id="SOHUCS" :sid="$route.path"></div>
       </div>
