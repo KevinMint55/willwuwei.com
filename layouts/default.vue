@@ -164,7 +164,7 @@ export default {
   left: 0;
   width: calc(100% - 8px);
   height: 100%;
-  z-index: 1;
+  z-index: -1;
 }
 
 .backToTop {
