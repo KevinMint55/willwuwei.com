@@ -21,6 +21,7 @@
         <li style="left: 19.6891%; top: 32.5%;" @click="turnPage(-1)">上一页</li>
       </ul>
     </div>
+    <tool-box />
     <div ref="nest"></div>
     <canvas ref="star" :class="s.star"></canvas>
   </div>
@@ -28,11 +29,13 @@
 
 <script>
 import navbar from '~/components/navbar.vue';
+import toolBox from '~/components/toolBox.vue';
 import Star from '~/plugins/star';
 
 export default {
   components: {
     navbar,
+    toolBox,
   },
   data() {
     return {

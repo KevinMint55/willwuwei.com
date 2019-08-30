@@ -2,7 +2,7 @@
   <div :class="s.sidebar">
     <aside :class="s.search" v-visible="{ className: s.animate }">
       <form :class="s.searchForm">
-        <input ref="search" type="text" placeholder="搜索文章~" :class="s.searchInput" v-model="searchContent" @keydown.enter.prevent="search">
+        <input ref="search" type="text" :placeholder="$l.rightBar.search" :class="s.searchInput" v-model="searchContent" @keydown.enter.prevent="search">
         <button :class="s.searchBtn" @click.prevent="search">
           <i class="km km-search_light"></i>
         </button>
@@ -12,10 +12,10 @@
       <div :class="s.authorName">KEVINMINT</div>
       <div :class="s.authorInfo">
         <img src="../assets/images/avatar.jpg" alt="">
-        <p>不想旅行的程序员不是好摄影师</p>
+        <p>{{ $l.signature }}</p>
       </div>
     </aside>
-    <panel icon-class="km km-hot" name="最热文章">
+    <panel icon-class="km km-hot" :name="$l.rightBar.hot">
       <ul>
         <li v-for="post in hotList" :class="s.post" @click="$router.push({ path: `/post/${post._id}` })">
           <span :class="s.name">{{ post.title }}</span>
@@ -25,14 +25,14 @@
     </panel>
     <aside :class="s.panel" v-visible="{ className: s.animate }">
       <ul :class="s.tabs">
-        <li v-for="tab in ['网站导航', '友情链接', '个人链接']" :class="[curTab === tab ? s.active : '']" @click="curTab = tab">{{ tab }}</li>
+        <li v-for="tab in ['sitemap', 'blogroll', 'personalLink']" :class="[curTab === tab ? s.active : '']" @click="curTab = tab">{{ $l.rightBar[tab] }}</li>
       </ul>
       <div :class="s.tabContent">
         <transition name="fade" mode="out-in">
-          <div v-if="curTab === '网站导航'" key="网站导航">
+          <div v-if="curTab === 'sitemap'" key="sitemap">
             <p :class="s.title">
               <i class="km km-apps"></i>
-              <span>分类</span>
+              <span>{{ $l.category }}</span>
             </p>
             <ul :class="s.category">
               <li
@@ -45,7 +45,7 @@
             </ul>
             <p :class="s.title">
               <i class="km km-tags"></i>
-              <span>标签</span>
+              <span>{{ $l.tag }}</span>
             </p>
             <ul :class="s.tag">
               <li
@@ -60,10 +60,10 @@
               </li>
             </ul>
           </div>
-          <ul v-if="curTab === '友情链接'" key="友情链接" :class="s.url">
+          <ul v-if="curTab === 'blogroll'" key="blogroll" :class="s.url">
             <li v-for="item in friends" @click="openUrl(item.url)">{{ item.name }}</li>
           </ul>
-          <ul v-if="curTab === '个人链接'" key="个人链接" :class="s.url">
+          <ul v-if="curTab === 'personalLink'" key="personalLink" :class="s.url">
             <li v-for="item in personal" @click="openUrl(item.url)">{{ item.name }}</li>
           </ul>
         </transition>
@@ -81,7 +81,7 @@ export default {
   },
   data() {
     return {
-      curTab: '网站导航',
+      curTab: 'sitemap',
       friends: [
         {
           name: 'Josh',

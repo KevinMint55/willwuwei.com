@@ -8,9 +8,9 @@
     </div>
     <ul :class="s.articleList">
       <li :class="s.article" v-for="article in articleList" v-visible="{ className: s.animate }">
-        <div :class="[s.date, s.year]">{{ article.showDate | getYear }}年</div>
+        <div :class="[s.date, s.year]">{{ article.showDate | getYear }}</div>
         <div :class="s.date">
-          <div :class="s.month">{{ article.showDate | getMonth }}月</div>
+          <div :class="s.month">{{ $l.month[new Date(article.showDate).getMonth() + 1] }}</div>
           <div :class="s.day">{{ article.showDate | getDate }}</div>
         </div>
         <div :class="s.title">
@@ -110,13 +110,6 @@ export default {
       const year = new Date(val).getFullYear();
       return year;
     },
-    getMonth(val) {
-      let month = new Date(val).getMonth() + 1;
-      if (month < 10) {
-        month = `0${month}`;
-      }
-      return month;
-    },
     getDate(val) {
       let date = new Date(val).getDate();
       if (date < 10) {
@@ -193,7 +186,7 @@ export default {
 }
 
 .year {
-  width: 70px;
+  width: 60px;
   height: 24px;
   line-height: 24px;
   padding-top: 0;

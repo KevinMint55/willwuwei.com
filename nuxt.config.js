@@ -61,6 +61,9 @@ module.exports = {
     {
       src: '~/plugins/utils',
     },
+    {
+      src: '~/plugins/lang',
+    },
   ],
   build: {
     postcss: {

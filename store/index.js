@@ -1,6 +1,7 @@
 import service from '~/plugins/axios'
 
 export const state = () => ({
+  language: 'zh',
   hotList: [],
   category: [],
   tagsList: [],
@@ -24,6 +25,13 @@ export const mutations = {
   },
   setArticles (state, payload) {
     state.articles = payload;
+  },
+  swichLang(state) {
+    if (state.language === 'zh') {
+      state.language = 'en';
+    } else {
+      state.language = 'zh';
+    }
   },
 }
 

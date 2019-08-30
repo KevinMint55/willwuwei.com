@@ -2,7 +2,7 @@
   <header :class="s.header">
     <div class="container" :class="s.main">
       <div :class="s.brand" @click="$router.push('/')">
-        沐夏~
+        {{ $l.name }}
       </div>
       <div :class="[s.toggle, showMenu ? s.active: '']" @click="showMenu = !showMenu">
         <span></span>
@@ -11,7 +11,7 @@
         <ul :class="s.navList">
           <li v-for="nav in navList" @click="go(nav.path)" :class="[$route.path === nav.path ? s.current : '']">
             <i class="km" :class="nav.icon"></i>
-            {{ nav.name }}
+            {{ $l.topBar[nav.name] }}
           </li>
         </ul>
       </div>
@@ -25,27 +25,27 @@ export default {
     return {
       navList: [
         {
-          name: '首页',
+          name: 'home',
           icon: 'km-home',
           path: '/',
         },
         {
-          name: '归档',
+          name: 'archive',
           icon: 'km-archive',
           path: '/archives',
         },
         {
-          name: '实验室',
+          name: 'laboratory',
           icon: 'km-lab',
           path: '/lab',
         },
         {
-          name: '留言板',
+          name: 'guestbook',
           icon: 'km-guestbook',
           path: '/messageBoard',
         },
         {
-          name: '关于我',
+          name: 'about',
           icon: 'km-about',
           path: '/about',
         },

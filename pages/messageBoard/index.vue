@@ -2,7 +2,7 @@
   <div class="container view">
     <div class="mainstay">
       <div :class="s.content">
-        <h3>留言板</h3>
+        <h3>{{ $l.topBar.guestbook }}</h3>
         <h4>(＾Ｕ＾)ノ~ＹＯ</h4>
       </div>
       <div :class="s.comment">
