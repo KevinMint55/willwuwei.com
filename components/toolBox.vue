@@ -19,6 +19,12 @@ export default {
 </script>
 
 <style lang="scss" module="s">
+@media (max-width: 760px) {
+  .tool_box {
+    display: none;
+  }
+}
+
 .tool_box {
   position: fixed;
   right: 0;
