@@ -5,9 +5,9 @@
         <h3>{{ $l.topBar.guestbook }}</h3>
         <h4>(＾Ｕ＾)ノ~ＹＯ</h4>
       </div>
-      <div :class="s.comment">
+      <!-- <div :class="s.comment">
         <div id="SOHUCS" :sid="$route.path"></div>
-      </div>
+      </div> -->
     </div>
     <sidebar></sidebar>
   </div>
@@ -28,7 +28,7 @@ export default {
     };
   },
   mounted() {
-    this.initComment();
+    // this.initComment();
   },
   methods: {
     initComment() {

@@ -31,9 +31,9 @@
       </div>
       <div v-if="post.editorType === 'richtext'" v-html="post.content" class="blog-content"></div>
       <div v-if="post.editorType === 'markdown'" v-html="compiledMarkdown" class="markdown-body"></div>
-      <div :class="s.comment">
+      <!-- <div :class="s.comment">
         <div id="SOHUCS" :sid="$route.path"></div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -85,7 +85,7 @@ export default {
     },
   },
   mounted() {
-    this.initComment();
+    // this.initComment();
   },
   methods: {
     initComment() {

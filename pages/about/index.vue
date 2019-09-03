@@ -16,7 +16,7 @@
           Done is better than perfect
         </h4>
         <div :class="s.findMe">
-          <img src="https://qiniu.kevinmint.com/wechat.jpg" alt="" :class="[showWechat ? s.show : '']" v-clickoutside="closeWechat">
+          <img src="https://qiniu.kevinmint.com/qr.jpg" alt="" :class="[showWechat ? s.show : '']" v-clickoutside="closeWechat">
           <span :class="s.button" @click.stop="showWechat = !showWechat">Find Me</span>
         </div>
       </div>
