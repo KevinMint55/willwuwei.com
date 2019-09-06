@@ -2,17 +2,21 @@
   <div class="container view">
     <div class="mainstay">
       <ul :class="s.archives">
-        <li v-for="archive in list">
+        <li v-for="(archive, index) in list" :key="index">
           <h3 :class="s.year">{{ archive.year }}</h3>
           <ul :class="s.articles">
-            <li v-for="article in archive.articles" @click="$router.push({ path: `/post/${article._id}`})">
+            <li
+              v-for="(article, cIndex) in archive.articles"
+              :key="cIndex"
+              @click="$router.push({ path: `/post/${article._id}` })"
+            >
               <h4>{{ article.title }}</h4>
             </li>
           </ul>
         </li>
       </ul>
     </div>
-    <sidebar></sidebar>
+    <sidebar />
   </div>
 </template>
 
@@ -20,17 +24,6 @@
 import sidebar from '~/components/sidebar';
 
 export default {
-  async asyncData ({ $axios }) {
-    const data = await $axios.$get('blog/archives');
-    if (data) {
-      return {
-        list: data,
-      };
-    }
-  },
-  async fetch ({ store }) {
-    await store.dispatch('loadSideBarData');
-  },
   components: {
     sidebar,
   },
@@ -38,6 +31,18 @@ export default {
     return {
       list: [],
     };
+  },
+  async asyncData({ $axios }) {
+    const data = await $axios.$get('blog/archives');
+    if (data) {
+      return {
+        list: data,
+      };
+    }
+    return {};
+  },
+  async fetch({ store }) {
+    await store.dispatch('loadSideBarData');
   },
   head() {
     return {
@@ -51,7 +56,7 @@ export default {
 .archives {
   padding: 20px;
   box-shadow: 0 0 50px black;
-  background-color: rgba(230,238,232,0.5);
+  background-color: rgba(230, 238, 232, 0.5);
   margin-bottom: 30px;
   min-height: 20px;
   border-radius: 4px;

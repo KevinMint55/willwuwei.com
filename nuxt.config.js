@@ -23,7 +23,7 @@ module.exports = {
         hid: 'description',
         name: 'description',
         content: 'Done is better than perfect',
-      }
+      },
     ],
     link: [
       {
@@ -70,11 +70,11 @@ module.exports = {
       plugins: {
         'postcss-import': {},
         'postcss-url': {},
-        'autoprefixer': {},
+        autoprefixer: {},
         'postcss-px-to-viewport': {
           unitToConvert: 'px',
           viewportWidth: 750,
-          propList:[],
+          propList: [],
           viewportUnit: 'vw',
           selectorBlackList: [],
           minPixelValue: 1,
@@ -82,6 +82,20 @@ module.exports = {
           exclude: [],
         },
       },
+    },
+    extend(config, ctx) {
+      // Run ESLint on save
+      if (ctx.isDev && ctx.isClient) {
+        config.module.rules.push({
+          enforce: 'pre',
+          test: /\.(js|vue)$/,
+          loader: 'eslint-loader',
+          exclude: /(node_modules)/,
+          options: {
+            formatter: require('eslint-friendly-formatter'),
+          },
+        });
+      }
     },
   },
 };

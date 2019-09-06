@@ -1,29 +1,16 @@
-import service from '~/plugins/axios'
-
-export const state = () => ({
-  language: 'zh',
-  hotList: [],
-  category: [],
-  tagsList: [],
-  articles: {
-    list: [],
-    pageCurrent: 1,
-    count: 0,
-    pageNumber: 1,
-  },
-})
+import service from '~/plugins/axios';
 
 export const mutations = {
-  setHotList (state, payload) {
+  setHotList(state, payload) {
     state.hotList = payload;
   },
-  setCategory (state, payload) {
+  setCategory(state, payload) {
     state.category = payload;
   },
-  setTagsList (state, payload) {
+  setTagsList(state, payload) {
     state.tagsList = payload;
   },
-  setArticles (state, payload) {
+  setArticles(state, payload) {
     state.articles = payload;
   },
   swichLang(state) {
@@ -33,7 +20,7 @@ export const mutations = {
       state.language = 'zh';
     }
   },
-}
+};
 
 export const actions = {
   async loadSideBarData({ dispatch }) {
@@ -58,7 +45,9 @@ export const actions = {
     const data = await service.get('blog/tags');
     commit('setTagsList', data);
   },
-  async getArticles({ commit }, { pageCurrent, category, tag, searchContent }) {
+  async getArticles({ commit }, {
+    pageCurrent, category, tag, searchContent,
+  }) {
     const data = await service.get('blog', {
       params: {
         pageCurrent,
@@ -69,4 +58,17 @@ export const actions = {
     });
     commit('setArticles', data);
   },
-}
+};
+
+export const state = () => ({
+  language: 'zh',
+  hotList: [],
+  category: [],
+  tagsList: [],
+  articles: {
+    list: [],
+    pageCurrent: 1,
+    count: 0,
+    pageNumber: 1,
+  },
+});

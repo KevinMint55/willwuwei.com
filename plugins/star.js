@@ -20,44 +20,45 @@ export default {
       this.stars = this.getStars(amount);
     },
     getStars(amount) {
-      let stars = []
+      const stars = [];
+      // eslint-disable-next-line no-plusplus
       while (amount--) {
         stars.push({
           x: Math.random() * this.width,
           y: Math.random() * this.height,
-          r: Math.random() + 0.6
-        })
+          r: Math.random() + 0.6,
+        });
       }
       return stars;
     },
     draw(ctx) {
       const {
         width,
-        height
+        height,
       } = this;
-      ctx.clearRect(0, 0, width, height)
-      ctx.fillStyle = '#fff'
-      this.stars.forEach(star => {
-        ctx.beginPath()
-        ctx.arc(star.x, star.y, star.r, 0, 2 * Math.PI)
-        ctx.fill()
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = '#fff';
+      this.stars.forEach((star) => {
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.r, 0, 2 * Math.PI);
+        ctx.fill();
       });
     },
     blink(width, height) {
-      this.stars = this.stars.map((star, idx) => {
-        let sign = Math.random() > 0.5 ? 1 : -1
-        star.r += sign * 0.2
+      this.stars = this.stars.map((star) => {
+        const sign = Math.random() > 0.5 ? 1 : -1;
+        star.r += sign * 0.2;
         if (star.r < 0) {
           // star.r = -star.r
-          star.r = 0
+          star.r = 0;
         } else if (star.r > 1) {
-          star.r -= 0.2
-        } else if (star.r == 0) {
+          star.r -= 0.2;
+        } else if (star.r === 0) {
           star.x = Math.random() * width;
           star.y = Math.random() * height;
         }
         return star;
-      })
+      });
     },
   },
-}
+};

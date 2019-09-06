@@ -3,13 +3,13 @@
     <div class="mainstayWrapper">
       <div :class="s.title">
         <h2>
-          <i class="km km-apps"></i>
+          <i class="km km-apps" />
           分类
-          <i class="km km-right"></i>
+          <i class="km km-right" />
           {{ $route.params.name }}
         </h2>
       </div>
-      <mainstay style="width: 100%;"/>
+      <mainstay style="width: 100%;" />
     </div>
     <sidebar />
   </div>
@@ -24,18 +24,18 @@ export default {
     mainstay,
     sidebar,
   },
-  async fetch ({ store, params }) {
+  data() {
+    return {
+    };
+  },
+  async fetch({ store, params }) {
     return Promise.all([
       store.dispatch('loadSideBarData'),
       store.dispatch('getArticles', {
         pageCurrent: params.num,
         category: params.name,
       }),
-    ])
-  },
-  data() {
-    return {
-    };
+    ]);
   },
   head() {
     return {
@@ -53,7 +53,7 @@ export default {
 }
 
 .title {
-  background-color: rgba(230,238,232,0.5);
+  background-color: rgba(230, 238, 232, 0.5);
   box-shadow: 0 0 8px black;
   margin: 0 15px 40px;
   border-radius: 4px;

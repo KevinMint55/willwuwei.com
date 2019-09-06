@@ -10,7 +10,7 @@ export default function ({ $axios, redirect }) {
   // $axios.onRequest(config => {
   // })
 
-  $axios.onResponse(response => {
+  $axios.onResponse((response) => {
     const res = response.data;
     if (res.status === 404) {
       redirect('/404');
@@ -22,11 +22,11 @@ export default function ({ $axios, redirect }) {
       return res;
     }
     return Promise.reject(res);
-  })
+  });
 
-  $axios.onError(error => {
+  $axios.onError((error) => {
     if (error.status === 404) {
       redirect('/404');
     }
-  })
+  });
 }

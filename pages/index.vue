@@ -14,6 +14,10 @@ export default {
     mainstay,
     sidebar,
   },
+  data() {
+    return {
+    };
+  },
   async fetch({ store }) {
     return Promise.all([
       store.dispatch('loadSideBarData'),
@@ -21,10 +25,6 @@ export default {
         pageCurrent: 1,
       }),
     ]);
-  },
-  data() {
-    return {
-    };
   },
   head() {
     return {

@@ -4,24 +4,29 @@
       <div :class="s.content">
         <h3>Will Wu</h3>
         <h4>
-          <i class="km km-work"></i>
+          <i class="km km-work" />
           Frontend Developer
         </h4>
         <h4>
-          <i class="km km-email"></i>
+          <i class="km km-email" />
           innovation55@foxmail.com
         </h4>
         <h4>
-          <i class="km km-block"></i>
+          <i class="km km-block" />
           Done is better than perfect
         </h4>
         <div :class="s.findMe">
-          <img src="https://qiniu.kevinmint.com/qr.jpg" alt="" :class="[showWechat ? s.show : '']" v-clickoutside="closeWechat">
+          <img
+            v-clickoutside="closeWechat"
+            src="https://qiniu.kevinmint.com/qr.jpg"
+            alt
+            :class="[showWechat ? s.show : '']"
+          />
           <span :class="s.button" @click.stop="showWechat = !showWechat">Find Me</span>
         </div>
       </div>
     </div>
-    <sidebar></sidebar>
+    <sidebar />
   </div>
 </template>
 
@@ -29,9 +34,6 @@
 import sidebar from '~/components/sidebar';
 
 export default {
-  async fetch ({ store }) {
-    await store.dispatch('loadSideBarData');
-  },
   components: {
     sidebar,
   },
@@ -39,6 +41,9 @@ export default {
     return {
       showWechat: false,
     };
+  },
+  async fetch({ store }) {
+    await store.dispatch('loadSideBarData');
   },
   methods: {
     closeWechat() {
@@ -55,7 +60,7 @@ export default {
 
 <style lang="scss" module="s">
 .content {
-  background-color: rgba(230,238,232,0.5);
+  background-color: rgba(230, 238, 232, 0.5);
   box-shadow: 0 0 8px black;
   border-radius: 4px;
   padding: 30px 15px;

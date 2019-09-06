@@ -8,32 +8,32 @@
           </div>
           <div :class="s.tag">
             <div>
-              <i class="km km-apps"></i>
+              <i class="km km-apps" />
               <span>{{ post.category }}</span>
             </div>
             <div>
-              <i class="km km-tags"></i>
+              <i class="km km-tags" />
               <span>{{ post.tags.toString() }}</span>
             </div>
             <div>
-              <i class="km km-calendar"></i>
-              <span>{{ $utils.formatDate(post.showDate, 'yyyy-MM-dd') }}</span>
+              <i class="km km-calendar" />
+              <span>{{ $utils.formatDate(post.showDate, "yyyy-MM-dd") }}</span>
             </div>
             <div>
-              <i class="km km-eye"></i>
+              <i class="km km-eye" />
               <span>{{ post.PV }}°C</span>
             </div>
           </div>
         </div>
         <figure :class="s.cover">
-          <img :src="$utils.setCdn(post.cover)" alt="">
+          <img :src="$utils.setCdn(post.cover)" alt />
         </figure>
       </div>
-      <div v-if="post.editorType === 'richtext'" v-html="post.content" class="blog-content"></div>
-      <div v-if="post.editorType === 'markdown'" v-html="compiledMarkdown" class="markdown-body"></div>
+      <div v-if="post.editorType === 'richtext'" class="blog-content" v-html="post.content" />
+      <div v-if="post.editorType === 'markdown'" class="markdown-body" v-html="compiledMarkdown" />
       <!-- <div :class="s.comment">
         <div id="SOHUCS" :sid="$route.path"></div>
-      </div> -->
+      </div>-->
     </div>
   </div>
 </template>
@@ -54,11 +54,21 @@ marked.setOptions({
   sanitize: false,
   smartLists: true,
   smartypants: false,
-  highlight: code => hljs.highlightAuto(code).value,
+  highlight: (code) => hljs.highlightAuto(code).value,
 });
 
 export default {
   scrollToTop: true,
+  data() {
+    return {
+      post: {},
+    };
+  },
+  computed: {
+    compiledMarkdown() {
+      return marked(this.post.content, { sanitize: true });
+    },
+  },
   async asyncData({ $axios, params }) {
     const post = await $axios.$get('blog/details', {
       params: {
@@ -68,21 +78,12 @@ export default {
     if (post) {
       return { post };
     }
-  },
-  data() {
-    return {
-      post: {},
-    };
+    return {};
   },
   head() {
     return {
       title: this.post.title,
     };
-  },
-  computed: {
-    compiledMarkdown() {
-      return marked(this.post.content, { sanitize: true });
-    },
   },
   mounted() {
     // this.initComment();

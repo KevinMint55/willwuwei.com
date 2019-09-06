@@ -14,17 +14,17 @@ export default {
     mainstay,
     sidebar,
   },
-  async fetch ({ store, params }) {
+  data() {
+    return {
+    };
+  },
+  async fetch({ store, params }) {
     return Promise.all([
       store.dispatch('loadSideBarData'),
       store.dispatch('getArticles', {
         pageCurrent: params.num,
       }),
-    ])
-  },
-  data() {
-    return {
-    };
+    ]);
   },
   head() {
     return {

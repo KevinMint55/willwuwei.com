@@ -1,16 +1,19 @@
 <template>
   <header :class="s.header">
     <div class="container" :class="s.main">
-      <div :class="s.brand" @click="$router.push('/')">
-        {{ $l.name }}
+      <div :class="s.brand" @click="$router.push('/')">{{ $l.name }}</div>
+      <div :class="[s.toggle, showMenu ? s.active : '']" @click="showMenu = !showMenu">
+        <span />
       </div>
-      <div :class="[s.toggle, showMenu ? s.active: '']" @click="showMenu = !showMenu">
-        <span></span>
-      </div>
-      <div :class="[s.nav, showMenu ? s.active: '']">
+      <div :class="[s.nav, showMenu ? s.active : '']">
         <ul :class="s.navList">
-          <li v-for="nav in navList" @click="go(nav.path)" :class="[$route.path === nav.path ? s.current : '']">
-            <i class="km" :class="nav.icon"></i>
+          <li
+            v-for="(nav, index) in navList"
+            :class="[$route.path === nav.path ? s.current : '']"
+            @click="go(nav.path)"
+            :key="index"
+          >
+            <i class="km" :class="nav.icon" />
             {{ $l.topBar[nav.name] }}
           </li>
         </ul>
@@ -68,7 +71,7 @@ export default {
   font-size: 14px;
   border-radius: 0;
   border-color: #080808;
-  background-color: rgba(10,10,0,0.7);
+  background-color: rgba(10, 10, 0, 0.7);
   box-shadow: 0 0 8px black;
   min-height: 54px;
   z-index: 3;
@@ -83,8 +86,9 @@ export default {
   font-size: 24px;
   line-height: 54px;
   opacity: 1;
-  background-color: rgba(0,0,0,0);
-  text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #228DFF, 0 0 35px #228DFF, 0 0 40px #228DFF, 0 0 50px #228DFF, 0 0 75px #228DFF;
+  background-color: rgba(0, 0, 0, 0);
+  text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #228dff,
+    0 0 35px #228dff, 0 0 40px #228dff, 0 0 50px #228dff, 0 0 75px #228dff;
   padding: 0 15px;
   cursor: pointer;
 }
@@ -97,15 +101,15 @@ export default {
     color: #fff;
     padding: 0 15px;
     cursor: pointer;
-    transition: all .25s ease-in-out;
+    transition: all 0.25s ease-in-out;
     > i {
       margin-right: 6px;
     }
     &.current {
-      background-color: rgba(138,43,226,0.7);
+      background-color: rgba(138, 43, 226, 0.7);
     }
     &:not(.current):hover {
-      background-color: rgba(100,90,200,0.7);
+      background-color: rgba(100, 90, 200, 0.7);
     }
   }
 }
@@ -165,8 +169,8 @@ export default {
   .nav {
     width: 100vw;
     height: 0;
-    transition: all .25s;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.1);
+    transition: all 0.25s;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
     &.active {
       height: 240px;
     }

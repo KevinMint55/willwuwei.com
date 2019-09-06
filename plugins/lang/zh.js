@@ -32,4 +32,4 @@ export default {
   tag: '标签',
   category: '分类',
   signature: '不想旅行的程序员不是好摄影师',
-}
+};

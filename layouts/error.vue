@@ -1,8 +1,16 @@
 <template>
   <div class="error-page">
     <div class="error">
-      <svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" fill="#DBE1EC" viewBox="0 0 48 48">
-        <path d="M22 30h4v4h-4zm0-16h4v12h-4zm1.99-10C12.94 4 4 12.95 4 24s8.94 20 19.99 20S44 35.05 44 24 35.04 4 23.99 4zM24 40c-8.84 0-16-7.16-16-16S15.16 8 24 8s16 7.16 16 16-7.16 16-16 16z" />
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="90"
+        height="90"
+        fill="#DBE1EC"
+        viewBox="0 0 48 48"
+      >
+        <path
+          d="M22 30h4v4h-4zm0-16h4v12h-4zm1.99-10C12.94 4 4 12.95 4 24s8.94 20 19.99 20S44 35.05 44 24 35.04 4 23.99 4zM24 40c-8.84 0-16-7.16-16-16S15.16 8 24 8s16 7.16 16 16-7.16 16-16 16z"
+        />
       </svg>
       <div class="title">{{ message }}</div>
       <p class="description">
@@ -14,7 +22,7 @@
 
 <script>
 export default {
-  name: 'error',
+  name: 'Error',
   props: {
     error: {
       type: Object,
@@ -27,17 +35,17 @@ export default {
       meta: [
         {
           name: 'viewport',
-          content: 'width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no'
+          content: 'width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no',
         },
       ],
-    }
+    };
   },
   computed: {
     statusCode() {
       if (this.$route.path === '/5000') {
         return 500;
       }
-      return (this.error && this.error.statusCode) || 500
+      return (this.error && this.error.statusCode) || 500;
     },
     message() {
       if (this.$route.path === '/5000') {
@@ -47,16 +55,16 @@ export default {
         return '这个页面无法找到';
       }
       return 'Error';
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style>
 .error-page {
   padding: 1rem;
-  background: #F7F8FB;
-  color: #47494E;
+  background: #f7f8fb;
+  color: #47494e;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -67,7 +75,7 @@ export default {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
-  position: absolute!important;
+  position: absolute !important;
   top: 0;
   left: 0;
   right: 0;
@@ -79,16 +87,16 @@ export default {
 .error-page .title {
   font-size: 1.5rem;
   margin-top: 15px;
-  color: #47494E;
+  color: #47494e;
   margin-bottom: 8px;
 }
 .error-page .description {
-  color: #7F828B;
+  color: #7f828b;
   line-height: 21px;
   margin-bottom: 10px;
 }
 .error-page a {
-  color: #7F828B !important;
+  color: #7f828b !important;
   text-decoration: none;
 }
 </style>

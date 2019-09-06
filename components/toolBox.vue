@@ -37,10 +37,10 @@ export default {
     border-radius: 4px;
     cursor: pointer;
     &.zh {
-      background-color: rgba(246,14,14,0.5);
+      background-color: rgba(246, 14, 14, 0.5);
     }
     &.en {
-      background-color: rgba(34,12,239,0.5);
+      background-color: rgba(34, 12, 239, 0.5);
     }
   }
 }

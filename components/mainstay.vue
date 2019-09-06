@@ -1,13 +1,17 @@
 <template>
   <div class="mainstay">
-    <div :class="s.notice" v-if="notice">
+    <div v-if="notice" :class="s.notice">
       <button :class="s.close">
-        <i class="km km-close"></i>
+        <i class="km km-close" />
       </button>
       <p>{{ notice }}</p>
     </div>
     <ul :class="s.articleList">
-      <li :class="s.article" v-for="article in articleList" v-visible="{ className: s.animate }">
+      <li
+        v-for="(article, index) in articleList"
+        :key="index"
+        v-visible="{ className: s.animate }"
+        :class="s.article">
         <div :class="[s.date, s.year]">{{ article.showDate | getYear }}</div>
         <div :class="s.date">
           <div :class="s.month">{{ $l.month[new Date(article.showDate).getMonth() + 1] }}</div>
@@ -17,48 +21,45 @@
           <h3 @click="$router.push({ path: `/post/${article._id}` })">{{ article.title }}</h3>
         </div>
         <div :class="[s.mobile, s.calendar]">
-          <i class="km km-calendar"></i>
-          {{ $utils.formatDate(article.showDate, 'yyyy-MM-dd') }}
+          <i class="km km-calendar" />
+          {{ $utils.formatDate(article.showDate, "yyyy-MM-dd") }}
         </div>
         <div :class="s.tag">
           <span>
-            <i class="km km-apps"></i>
+            <i class="km km-apps" />
             {{ article.category }}
           </span>
           <span>
-            <i class="km km-tags"></i>
+            <i class="km km-tags" />
             {{ article.tags.toString() }}
           </span>
           <span>
-            <i class="km km-eye"></i>
+            <i class="km km-eye" />
             {{ article.PV }}°C
           </span>
         </div>
         <div :class="s.content">
           <div :class="s.item" @click="$router.push({ path: `/post/${article._id}` })">
             <div :class="s.img">
-              <img :src="$utils.setCdn(article.cover)" alt="">
+              <img :src="$utils.setCdn(article.cover)" alt />
             </div>
-            <div :class="s.info">
-              {{ article.description }}
-            </div>
+            <div :class="s.info">{{ article.description }}</div>
           </div>
         </div>
-        <div :class="[s.mobile, s.info]">
-          {{ article.description }}
-        </div>
-        <div :class="[s.mobile, s.read]" @click="$router.push({ path: `/post/${article._id}` })">
-          阅读全文
-        </div>
+        <div :class="[s.mobile, s.info]">{{ article.description }}</div>
+        <div
+          :class="[s.mobile, s.read]"
+          @click="$router.push({ path: `/post/${article._id}` })"
+        >阅读全文</div>
       </li>
     </ul>
     <pagination
-      @on-change="turnPage"
       :current-page="pageCurrent"
       :page-size="pageSize"
       :total="total"
-      style="margin-bottom: 30px;">
-    </pagination>
+      style="margin-bottom: 30px;"
+      @on-change="turnPage"
+    />
   </div>
 </template>
 
@@ -68,6 +69,19 @@ import pagination from './pagination.vue';
 export default {
   components: {
     pagination,
+  },
+  filters: {
+    getYear(val) {
+      const year = new Date(val).getFullYear();
+      return year;
+    },
+    getDate(val) {
+      let date = new Date(val).getDate();
+      if (date < 10) {
+        date = `0${date}`;
+      }
+      return date;
+    },
   },
   data() {
     return {
@@ -94,7 +108,7 @@ export default {
   methods: {
     turnPage(page) {
       if (this.$route.name === 'index') {
-        this.$router.push({ name: 'page-num', params: { num: page }});
+        this.$router.push({ name: 'page-num', params: { num: page } });
         return;
       }
       if (page === 1 && this.$route.name === 'page-num') {
@@ -105,27 +119,14 @@ export default {
       this.$router.push({ name: this.$route.name, params });
     },
   },
-  filters: {
-    getYear(val) {
-      const year = new Date(val).getFullYear();
-      return year;
-    },
-    getDate(val) {
-      let date = new Date(val).getDate();
-      if (date < 10) {
-        date = `0${date}`;
-      }
-      return date;
-    },
-  },
 };
 </script>
 
 <style lang="scss" module="s">
 .notice {
   position: relative;
-  background-color: rgba(230,238,232,0.5);
-  transition: all .3s ease;
+  background-color: rgba(230, 238, 232, 0.5);
+  transition: all 0.3s ease;
   box-shadow: 0 0 8px black;
   min-height: 20px;
   padding: 19px;
@@ -142,21 +143,21 @@ export default {
     }
   }
   &:hover {
-    background-color: rgba(255,255,255,0.9);
+    background-color: rgba(255, 255, 255, 0.9);
     box-shadow: 0 0 50px black;
   }
 }
 
 .article {
   position: relative;
-  background-color: rgba(230,238,232,0.5);
+  background-color: rgba(230, 238, 232, 0.5);
   box-shadow: 0 0 8px black;
   padding: 20px;
   margin-bottom: 30px;
   border-radius: 4px;
 
   backface-visibility: hidden;
-  transition: all 1s cubic-bezier(.175,.885,.32,1.275);
+  transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   transform: perspective(2500px) rotateX(-100deg);
   &.animate {
     transform: perspective(2500px) rotateX(0);
@@ -178,7 +179,7 @@ export default {
   color: #fff;
   padding-top: 10px;
   text-align: center;
-  box-shadow: 0 2px 8px 4px rgba(255, 255, 255, .2);
+  box-shadow: 0 2px 8px 4px rgba(255, 255, 255, 0.2);
   .day {
     font-size: 30px;
     margin-top: -5px;
@@ -194,7 +195,7 @@ export default {
   left: -12px;
   border-radius: 0 4px 4px 0;
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 100%;
     left: 0;
@@ -203,8 +204,8 @@ export default {
     height: 0;
     border-width: 6px;
     border-style: solid;
-    border-top-color: rgba(255, 255, 255, .8);
-    border-right-color: rgba(255, 255, 255, .8);
+    border-top-color: rgba(255, 255, 255, 0.8);
+    border-right-color: rgba(255, 255, 255, 0.8);
     border-bottom-color: transparent;
     border-left-color: transparent;
   }
@@ -217,7 +218,8 @@ export default {
     font-size: 24px;
     color: #fff;
     cursor: pointer;
-    text-shadow: 0 0 2px #fff, 0 0 4px #fff, 0 0 6px #fff, 0 0 4px #228DFF, 0 0 35px #228DFF, 0 0 16px #228DFF, 0 0 20px #228DFF, 0 0 30px #228DFF;
+    text-shadow: 0 0 2px #fff, 0 0 4px #fff, 0 0 6px #fff, 0 0 4px #228dff,
+      0 0 35px #228dff, 0 0 16px #228dff, 0 0 20px #228dff, 0 0 30px #228dff;
     &:hover {
       animation: neon 1.5s ease-in-out infinite alternate;
     }
@@ -226,10 +228,12 @@ export default {
 
 @keyframes neon {
   0% {
-    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #228DFF, 0 0 70px #228DFF, 0 0 80px #228DFF, 0 0 100px #228DFF, 0 0 150px #228DFF;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #228dff,
+      0 0 70px #228dff, 0 0 80px #228dff, 0 0 100px #228dff, 0 0 150px #228dff;
   }
   100% {
-    text-shadow: 0 0 2px #fff, 0 0 4px #fff, 0 0 6px #fff, 0 0 4px #228DFF, 0 0 35px #228DFF, 0 0 16px #228DFF, 0 0 20px #228DFF, 0 0 30px #228DFF;
+    text-shadow: 0 0 2px #fff, 0 0 4px #fff, 0 0 6px #fff, 0 0 4px #228dff,
+      0 0 35px #228dff, 0 0 16px #228dff, 0 0 20px #228dff, 0 0 30px #228dff;
   }
 }
 
@@ -239,11 +243,11 @@ export default {
   margin: 20px;
   > span {
     color: #fff;
-    padding: .3em .6em;
-    border-radius: .25em;
+    padding: 0.3em 0.6em;
+    border-radius: 0.25em;
     font-size: 12px;
-    transition: all .3s ease-in-out;
-    background-color: rgba(10,10,0,0.7);
+    transition: all 0.3s ease-in-out;
+    background-color: rgba(10, 10, 0, 0.7);
     cursor: default;
     i {
       margin-right: 2px;
@@ -263,7 +267,7 @@ export default {
   margin-bottom: 20px;
   border: 1px solid transparent;
   border-radius: 4px;
-  background-color: rgba(230,238,232,0.5);
+  background-color: rgba(230, 238, 232, 0.5);
   box-shadow: 0 0 8px black;
   cursor: pointer;
   .item {
@@ -282,7 +286,7 @@ export default {
   }
   .img {
     transform: scale(1);
-    transition: all .35s ease-in-out;
+    transition: all 0.35s ease-in-out;
     img {
       width: 100%;
       height: 100%;
@@ -297,13 +301,13 @@ export default {
     text-align: center;
     visibility: hidden;
     opacity: 0;
-    background: rgba(0,0,0,0.6);
-    transition: all .35s ease-in-out;
+    background: rgba(0, 0, 0, 0.6);
+    transition: all 0.35s ease-in-out;
     color: #bbb;
     padding: 20px;
     font-style: italic;
     font-size: 24px;
-    transition: all .35s .3s linear;
+    transition: all 0.35s 0.3s linear;
     transform: scale(5);
   }
   &:hover {

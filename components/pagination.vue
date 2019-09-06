@@ -1,35 +1,40 @@
 <template>
   <div class="pagination">
-    <button class="btn btn-prev" @click="turnPage(internalCurrentPage - 1)" :class="{ disabled: internalCurrentPage - 1 < 1}">
-      <i class="km km-back"></i>
+    <button
+      class="btn btn-prev"
+      :class="{ disabled: internalCurrentPage - 1 < 1 }"
+      @click="turnPage(internalCurrentPage - 1)"
+    >
+      <i class="km km-back" />
     </button>
     <ul class="pager">
-      <li
-        :class="{ active: internalCurrentPage === 1 }"
-        v-if="pageCount > 0" @click="turnPage(1)">1</li>
-      <li
-        class="more btn-quickprev"
-        v-if="showPrevMore" @click="turnPage(internalCurrentPage - 5)">
-        <i class="km km-more"></i>
-        <i class="km km-doubleleft"></i>
+      <li v-if="pageCount > 0" :class="{ active: internalCurrentPage === 1 }" @click="turnPage(1)">1</li>
+      <li v-if="showPrevMore" class="more btn-quickprev" @click="turnPage(internalCurrentPage - 5)">
+        <i class="km km-more" />
+        <i class="km km-doubleleft" />
       </li>
       <li
         v-for="pager in pagers"
         :key="pager"
         :class="{ active: internalCurrentPage === pager }"
-        @click="turnPage(pager)">{{ pager }}</li>
-      <li
-        class="more btn-quicknext"
-        v-if="showNextMore" @click="turnPage(internalCurrentPage + 5)">
-        <i class="km km-more"></i>
-        <i class="km km-doubleright"></i>
+        @click="turnPage(pager)"
+      >{{ pager }}</li>
+      <li v-if="showNextMore" class="more btn-quicknext" @click="turnPage(internalCurrentPage + 5)">
+        <i class="km km-more" />
+        <i class="km km-doubleright" />
       </li>
       <li
+        v-if="pageCount > 1"
         :class="{ active: internalCurrentPage === pageCount }"
-        v-if="pageCount > 1" @click="turnPage(pageCount)">{{ pageCount }}</li>
+        @click="turnPage(pageCount)"
+      >{{ pageCount }}</li>
     </ul>
-    <button class="btn btn-next" @click="turnPage(internalCurrentPage + 1)" :class="{ disabled: internalCurrentPage + 1 > pageCount}">
-      <i class="km km-right"></i>
+    <button
+      class="btn btn-next"
+      :class="{ disabled: internalCurrentPage + 1 > pageCount }"
+      @click="turnPage(internalCurrentPage + 1)"
+    >
+      <i class="km km-right" />
     </button>
   </div>
 </template>
@@ -39,89 +44,91 @@ export default {
   props: {
     currentPage: {
       type: Number,
-      default: 1
+      default: 1,
     },
     pageSize: {
       type: Number,
-      default: 10
+      default: 10,
     },
     total: {
       type: Number,
-      default: 0
-    }
+      default: 0,
+    },
   },
   data() {
     return {
       internalCurrentPage: 1,
       internalPageSize: 0,
       showPrevMore: false,
-      showNextMore: false
-    }
+      showNextMore: false,
+    };
   },
   computed: {
     pageCount() {
-      return Math.ceil(this.total / this.internalPageSize)
+      return Math.ceil(this.total / this.internalPageSize);
     },
     pagers() {
-      const pagerCount = 7
+      const pagerCount = 7;
 
-      const currentPage = Number(this.internalCurrentPage)
-      const pageCount = Number(this.pageCount)
+      const currentPage = Number(this.internalCurrentPage);
+      const pageCount = Number(this.pageCount);
 
-      let showPrevMore = false
-      let showNextMore = false
+      let showPrevMore = false;
+      let showNextMore = false;
 
       if (pageCount > pagerCount) {
         if (currentPage > pagerCount - 3) {
-          showPrevMore = true
+          showPrevMore = true;
         }
 
         if (currentPage < pageCount - 3) {
-          showNextMore = true
+          showNextMore = true;
         }
       }
 
-      const array = []
+      const array = [];
 
       if (showPrevMore && !showNextMore) {
-        const startPage = pageCount - (pagerCount - 2)
-        for (let i = startPage; i < pageCount; i++) {
-          array.push(i)
+        const startPage = pageCount - (pagerCount - 2);
+        for (let i = startPage; i < pageCount; i += 1) {
+          array.push(i);
         }
       } else if (!showPrevMore && showNextMore) {
-        for (let i = 2; i < pagerCount; i++) {
-          array.push(i)
+        for (let i = 2; i < pagerCount; i += 1) {
+          array.push(i);
         }
       } else if (showPrevMore && showNextMore) {
-        const offset = Math.floor(pagerCount / 2) - 1
-        for (let i = currentPage - offset; i <= currentPage + offset; i++) {
-          array.push(i)
+        const offset = Math.floor(pagerCount / 2) - 1;
+        for (let i = currentPage - offset; i <= currentPage + offset; i += 1) {
+          array.push(i);
         }
       } else {
-        for (let i = 2; i < pageCount; i++) {
-          array.push(i)
+        for (let i = 2; i < pageCount; i += 1) {
+          array.push(i);
         }
       }
 
-      this.showPrevMore = showPrevMore
-      this.showNextMore = showNextMore
+      // eslint-disable-next-line
+      this.showPrevMore = showPrevMore;
+      // eslint-disable-next-line
+      this.showNextMore = showNextMore;
 
-      return array
-    }
+      return array;
+    },
   },
   watch: {
     currentPage: {
       immediate: true,
       handler(val) {
-        this.internalCurrentPage = val
-      }
+        this.internalCurrentPage = val;
+      },
     },
     pageSize: {
       immediate: true,
       handler(val) {
-        this.internalPageSize = val
-      }
-    }
+        this.internalPageSize = val;
+      },
+    },
   },
   methods: {
     turnPage(page) {
@@ -138,9 +145,9 @@ export default {
       }
       this.internalCurrentPage = paging;
       this.$emit('on-change', this.internalCurrentPage);
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -161,7 +168,7 @@ export default {
     &:hover {
       color: #fff;
       background-color: #6b69d6;
-      transition: all .3s ease-in-out;
+      transition: all 0.3s ease-in-out;
     }
     &.disabled {
       display: none;
@@ -188,7 +195,7 @@ export default {
     &:hover {
       color: #fff;
       background-color: #6b69d6;
-      transition: all .3s ease-in-out;
+      transition: all 0.3s ease-in-out;
     }
     &.active {
       cursor: default;

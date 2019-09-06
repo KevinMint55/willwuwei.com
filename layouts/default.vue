@@ -7,11 +7,15 @@
       <a href="http://www.miitbeian.gov.cn" target="_blank">粤ICP备17065042号</a>
     </div>
     <transition name="slide">
-      <div :class="s.backToTop" @click="backToTop" v-if="showToTop">
-        <i class="km km-up"></i>
+      <div v-if="showToTop" :class="s.backToTop" @click="backToTop">
+        <i class="km km-up" />
       </div>
     </transition>
-    <div :class="[s.menu, showMenu ? s.open : s.close]" :style="{ top: `${menuTop}px`, left: `${menuLeft}px`}" v-clickoutside="closeMenu">
+    <div
+      v-clickoutside="closeMenu"
+      :class="[s.menu, showMenu ? s.open : s.close]"
+      :style="{ top: `${menuTop}px`, left: `${menuLeft}px` }"
+    >
       <ul :class="s.menuList">
         <li style="left: 50%; top: 15%;" @click="jumpMenu('/')">首页</li>
         <li style="left: 80.3109%; top: 32.5%;" @click="turnPage(1)">下一页</li>
@@ -22,8 +26,8 @@
       </ul>
     </div>
     <tool-box />
-    <div ref="nest"></div>
-    <canvas ref="star" :class="s.star"></canvas>
+    <div ref="nest" />
+    <canvas ref="star" :class="s.star" />
   </div>
 </template>
 
@@ -37,6 +41,7 @@ export default {
     navbar,
     toolBox,
   },
+  mixins: [Star],
   data() {
     return {
       showToTop: false,
@@ -50,6 +55,13 @@ export default {
       return this.$store.state.articles.pageNumber;
     },
   },
+  watch: {
+    $route() {
+      if (this.$route.name === 'post-id') {
+        this.backToTop();
+      }
+    },
+  },
   mounted() {
     this.$refs.app.addEventListener('scroll', () => {
       if (this.$refs.app.scrollTop > 100) {
@@ -61,14 +73,6 @@ export default {
     this.initRightMenu();
     this.initStar(this.$refs.star);
   },
-  watch: {
-    '$route'() {
-      if (this.$route.name === 'post-id') {
-        this.backToTop();
-      }
-    },
-  },
-  mixins: [Star],
   methods: {
     initRightMenu() {
       window.oncontextmenu = (e) => {
@@ -108,7 +112,7 @@ export default {
       this.closeMenu();
       if (val === -1) {
         if (!this.$route.params.num) {
-          return;
+          console.log('inexistence');
         } else {
           if (this.$route.params.num === 2 && this.$route.name === 'page-num') {
             this.$router.push('/');
@@ -121,7 +125,7 @@ export default {
         const curPage = this.$route.params.num || 1;
         if (curPage + 1 > this.pageNumber) return;
         if (this.$route.name === 'index') {
-          this.$router.push({ name: 'page-num', params: { num: 2 }});
+          this.$router.push({ name: 'page-num', params: { num: 2 } });
           return;
         }
         if (this.$route.name.includes('num')) {
@@ -151,7 +155,8 @@ export default {
   color: #eee;
   padding: 50px;
   a {
-    transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out,
+      border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
     border-bottom: dotted 1px;
     border-bottom-color: rgba(255, 255, 255, 0.5);
     &:hover {
@@ -180,7 +185,7 @@ export default {
   align-items: center;
   height: 40px;
   width: 40px;
-  background-color: rgba(10,10,0,0.7);
+  background-color: rgba(10, 10, 0, 0.7);
   color: white;
   border-radius: 50%;
   border: 2px solid #fff;
@@ -194,19 +199,19 @@ export default {
 
 .menu {
   position: fixed;
-  transition: all .4s;
+  transition: all 0.4s;
   z-index: 11;
   &.open {
     opacity: 1;
     .menuList {
-      animation: mopen .4s;
+      animation: mopen 0.4s;
     }
   }
   &.close {
     opacity: 0;
     z-index: -1;
     .menuList {
-      animation: mclose .4s;
+      animation: mclose 0.4s;
     }
   }
 }
@@ -216,7 +221,7 @@ export default {
   z-index: 11;
   width: 300px;
   height: 300px;
-  transition: all .4s ease-out;
+  transition: all 0.4s ease-out;
   > li {
     position: absolute;
     z-index: 11;
@@ -226,8 +231,9 @@ export default {
     width: 80px;
     height: 80px;
     color: #fff;
-    text-shadow: #dc965a 1px 0px 0px, #dc965a 0px 1px 0px, #dc965a -1px 0px 0px, #dc965a 0px -1px 0px;
-    background-color: rgba(10,10,0,0.7);
+    text-shadow: #dc965a 1px 0px 0px, #dc965a 0px 1px 0px, #dc965a -1px 0px 0px,
+      #dc965a 0px -1px 0px;
+    background-color: rgba(10, 10, 0, 0.7);
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
     border-radius: 50%;
     cursor: pointer;
@@ -235,7 +241,8 @@ export default {
     margin-top: -41px;
     transition: all 0.3s;
     &:hover {
-      text-shadow: #6cf 1px 0px 0px, #6cf 0px 1px 0px, #6cf -1px 0px 0px, #6cf 0px -1px 0px;
+      text-shadow: #6cf 1px 0px 0px, #6cf 0px 1px 0px, #6cf -1px 0px 0px,
+        #6cf 0px -1px 0px;
       box-shadow: #fff 0px 0px 80px inset;
     }
   }

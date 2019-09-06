@@ -6,55 +6,51 @@ import Vue from 'vue';
 
 const inBrowser = typeof window !== 'undefined';
 
-const style = (el, prop) => {
-  return typeof getComputedStyle !== 'undefined'
+const style = (el, prop) => (typeof getComputedStyle !== 'undefined'
     ? getComputedStyle(el, null).getPropertyValue(prop)
-    : el.style[prop]
-};
+    : el.style[prop]);
 
-const overflow = (el) => {
-  return style(el, 'overflow') + style(el, 'overflow-y') + style(el, 'overflow-x')
-};
+const overflow = (el) => style(el, 'overflow') + style(el, 'overflow-y') + style(el, 'overflow-x');
 
 const scrollParent = (el) => {
-  if (!inBrowser) return
+  if (!inBrowser) return '';
   if (!(el instanceof HTMLElement)) {
-    return window
+    return window;
   }
 
-  let parent = el
+  let parent = el;
 
   while (parent) {
     if (parent === document.body || parent === document.documentElement) {
-      break
+      break;
     }
 
     if (!parent.parentNode) {
-      break
+      break;
     }
 
     if (/(scroll|auto)/.test(overflow(parent))) {
-      return parent
+      return parent;
     }
 
-    parent = parent.parentNode
+    parent = parent.parentNode;
   }
 
-  return window
+  return window;
 };
 
 const visible = {
   bind(el, binding) {
     if (!binding.value) return;
     const dist = binding.value.dist || 100;
-    const className = binding.value.className;
+    const { className } = binding.value;
     const visibleHandler = () => {
       if (scrollParent(el).scrollTop + document.body.clientHeight > el.offsetTop + dist) {
         el.classList.add(className);
       } else {
         el.classList.remove(className);
       }
-    }
+    };
     visibleHandler();
     el.visibleHandler = visibleHandler;
     scrollParent(el).addEventListener('scroll', visibleHandler);

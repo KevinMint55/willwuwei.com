@@ -46,41 +46,41 @@ const utils = {
     const appid = 'cytx60lk0';
     const conf = 'prod_23b83f89193056901ef06333830d17ae';
     const width = window.innerWidth || document.documentElement.clientWidth;
-    const head = document.getElementsByTagName("head")[0] || document.head || document.documentElement;
-    window.$cyComment = document.createElement("script");
-    window.$cyComment.setAttribute("type", "text/javascript");
-    window.$cyComment.setAttribute("charset", "UTF-8");
-    window.$cyCommon = document.createElement("script");
-    window.$cyCommon.setAttribute("id", "cy_cmt_num");
-    window.$cyCommon.setAttribute("src", `https://changyan.sohu.com/upload/plugins/plugins.list.count.js?clientId=${appid}`);
+    const head = document.getElementsByTagName('head')[0] || document.head || document.documentElement;
+    window.$cyComment = document.createElement('script');
+    window.$cyComment.setAttribute('type', 'text/javascript');
+    window.$cyComment.setAttribute('charset', 'UTF-8');
+    window.$cyCommon = document.createElement('script');
+    window.$cyCommon.setAttribute('id', 'cy_cmt_num');
+    window.$cyCommon.setAttribute('src', `https://changyan.sohu.com/upload/plugins/plugins.list.count.js?clientId=${appid}`);
     head.appendChild(window.$cyCommon);
     if (width < 960) {
-      window.$cyComment.setAttribute("id", "changyan_mobile_js");
-      window.$cyComment.setAttribute("src", `https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=${appid}&conf=${conf}`);
+      window.$cyComment.setAttribute('id', 'changyan_mobile_js');
+      window.$cyComment.setAttribute('src', `https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=${appid}&conf=${conf}`);
       head.appendChild(window.$cyComment);
     } else {
       const loadJs = function (d, a) {
-        window.$cyComment.setAttribute("src", d);
-        if (typeof a === "function") {
+        window.$cyComment.setAttribute('src', d);
+        if (typeof a === 'function') {
           if (window.attachEvent) {
             window.$cyComment.onreadystatechange = function () {
               const e = window.$cyComment.readyState;
-              if (e === "loaded" || e === "complete") {
+              if (e === 'loaded' || e === 'complete') {
                 window.$cyComment.onreadystatechange = null;
-                a()
+                a();
               }
-            }
+            };
           } else {
-            window.$cyComment.onload = a
+            window.$cyComment.onload = a;
           }
         }
-        head.appendChild(window.$cyComment)
+        head.appendChild(window.$cyComment);
       };
-      loadJs("https://changyan.sohu.com/upload/changyan.js", function () {
+      loadJs('https://changyan.sohu.com/upload/changyan.js', () => {
         window.changyan.api.config({
           appid,
           conf,
-        })
+        });
       });
     }
   },

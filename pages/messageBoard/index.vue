@@ -7,9 +7,9 @@
       </div>
       <!-- <div :class="s.comment">
         <div id="SOHUCS" :sid="$route.path"></div>
-      </div> -->
+      </div>-->
     </div>
-    <sidebar></sidebar>
+    <sidebar />
   </div>
 </template>
 
@@ -17,15 +17,15 @@
 import sidebar from '~/components/sidebar';
 
 export default {
-  async fetch ({ store }) {
-    await store.dispatch('loadSideBarData');
-  },
   components: {
     sidebar,
   },
   data() {
     return {
     };
+  },
+  async fetch({ store }) {
+    await store.dispatch('loadSideBarData');
   },
   mounted() {
     // this.initComment();
@@ -45,7 +45,7 @@ export default {
 
 <style lang="scss" module="s">
 .content {
-  background-color: rgba(230,238,232,0.5);
+  background-color: rgba(230, 238, 232, 0.5);
   box-shadow: 0 0 8px black;
   border-radius: 4px;
   padding: 15px;

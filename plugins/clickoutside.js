@@ -5,7 +5,7 @@
 import Vue from 'vue';
 
 const clickoutside = {
-  bind(el, binding, vnode) {
+  bind(el, binding) {
     function documentHandler(e) {
       if (el.contains(e.target)) {
         return false;
@@ -13,6 +13,7 @@ const clickoutside = {
       if (binding.expression) {
         binding.value(e);
       }
+      return true;
     }
     el.__vueClickOutside__ = documentHandler;
     document.addEventListener('click', documentHandler);
@@ -20,7 +21,7 @@ const clickoutside = {
   update() {
 
   },
-  unbind(el, binding) {
+  unbind(el) {
     document.removeEventListener('click', el.__vueClickOutside__);
     delete el.__vueClickOutside__;
   },

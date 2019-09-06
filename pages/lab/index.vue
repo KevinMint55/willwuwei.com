@@ -1,13 +1,18 @@
 <template>
   <div class="container view">
     <div class="mainstay" :class="s.list">
-      <div v-for="(item, index) in list" :key="index" :class="s.item" @click="lookDetails(item.path)">
-        <i class="km" :class="`km-${item.icon}`" :style="{ color: item.color }"></i>
+      <div
+        v-for="(item, index) in list"
+        :key="index"
+        :class="s.item"
+        @click="lookDetails(item.path)"
+      >
+        <i class="km" :class="`km-${item.icon}`" :style="{ color: item.color }" />
         <h3>{{ item.name }}</h3>
         <p>{{ item.des }}</p>
       </div>
     </div>
-    <sidebar></sidebar>
+    <sidebar />
   </div>
 </template>
 
@@ -15,9 +20,6 @@
 import sidebar from '~/components/sidebar';
 
 export default {
-  async fetch ({ store }) {
-    await store.dispatch('loadSideBarData');
-  },
   components: {
     sidebar,
   },
@@ -48,6 +50,9 @@ export default {
       ],
     };
   },
+  async fetch({ store }) {
+    await store.dispatch('loadSideBarData');
+  },
   methods: {
     lookDetails(path) {
       window.open(path, '_blank');
@@ -70,7 +75,7 @@ export default {
 
 .item {
   width: 48%;
-  background-color: rgba(230,238,232,0.5);
+  background-color: rgba(230, 238, 232, 0.5);
   box-shadow: 0 0 8px black;
   color: #fff;
   margin-bottom: 20px;

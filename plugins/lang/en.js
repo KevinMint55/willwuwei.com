@@ -32,4 +32,4 @@ export default {
   tag: 'Tag',
   category: 'Category',
   signature: 'Programmers who don\'t want to travel are not good photographers',
-}
+};
