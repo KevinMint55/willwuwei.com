@@ -33,7 +33,7 @@ before_script:
 部署:
   stage: deploy
   script:
-    - pm2 stop blog
+    - pm2 delete blog
     - pm2 start npm --name 'blog' -- start
   only:
     - master
