@@ -2,10 +2,6 @@
 
 My blog by Nuxt.js & online site: https://www.kevinmint.com
 
-## TODO
-- 自行开发留言板(省得去不完的广告...)
-- 风格改得更简洁阳光一点...
-
 ## Build Setup
 
 ```
@@ -32,7 +28,7 @@ $ npm start
 
 ```
 
-Blog
+Project
   │
   ├── assets                # 资源目录
   |
