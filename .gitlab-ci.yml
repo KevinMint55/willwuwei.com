@@ -5,6 +5,7 @@ stages:
 
 cache:
   paths:
+    - .nuxt
     - node_modules
 
 before_script:
