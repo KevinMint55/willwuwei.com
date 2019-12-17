@@ -4,7 +4,7 @@
     <nuxt :class="s.main" />
     <div :class="s.copyright">
       <span>版权所有</span>
-      <a href="http://www.miitbeian.gov.cn" target="_blank">粤ICP备17065042号</a>
+      <a href="http://beian.miit.gov.cn/" target="_blank">粤ICP备17065042号</a>
     </div>
     <transition name="slide">
       <div v-if="showToTop" :class="s.backToTop" @click="backToTop">
@@ -21,7 +21,7 @@
         <li style="left: 80.3109%; top: 32.5%;" @click="turnPage(1)">下一页</li>
         <li style="left: 80.3109%; top: 67.5%;" @click="jumpMenu('/archives')">归档</li>
         <li style="left: 50%; top: 85%;" @click="jumpMenu('/about')">关于</li>
-        <li style="left: 19.6891%; top: 67.5%;" @click="jumpMenu('/messageBoard')">留言板</li>
+        <li style="left: 19.6891%; top: 67.5%;" @click="jumpMenu('/messageBoard')">喵喵喵</li>
         <li style="left: 19.6891%; top: 32.5%;" @click="turnPage(-1)">上一页</li>
       </ul>
     </div>

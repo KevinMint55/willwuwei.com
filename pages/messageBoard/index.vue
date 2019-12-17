@@ -37,7 +37,7 @@ export default {
   },
   head() {
     return {
-      title: '留言板',
+      title: '对我说',
     };
   },
 };
