@@ -1,6 +1,6 @@
-## kevinmint.com
+## willwuwei.com
 
-My blog by Nuxt.js & online site: https://www.kevinmint.com
+My blog by Nuxt.js & online site: https://www.willwuwei.com
 
 ## Build Setup
 
