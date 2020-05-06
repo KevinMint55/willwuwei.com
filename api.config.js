@@ -1,6 +1,6 @@
 const isProdMode = Object.is(process.env.NODE_ENV, 'production');
 
 export default {
-  cdnUrl: isProdMode ? 'https://qiniu.kevinmint.com/' : 'https://qiniu.kevinmint.com/',
-  baseURL: isProdMode ? 'https://api.kevinmint.com/' : 'https://api.kevinmint.com/',
+  cdnUrl: isProdMode ? 'https://qiniu.willwuwei.com/' : 'https://qiniu.willwuwei.com/',
+  baseURL: isProdMode ? 'https://api.willwuwei.com/' : 'https://api.willwuwei.com/',
 };

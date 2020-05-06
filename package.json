@@ -1,11 +1,11 @@
 {
-  "name": "kevinmint.com",
+  "name": "willwuwei.com",
   "version": "1.0.0",
-  "description": "kevinmint.com blog",
+  "description": "willwuwei.com blog",
   "author": {
-    "name": "KevinMint",
+    "name": "WillWu",
     "email": "innovation55@foxmail.com",
-    "url": "https://www.kevinmint.com"
+    "url": "https://www.willwuwei.com"
   },
   "license": "MIT",
   "private": false,

@@ -16,7 +16,7 @@
       </form>
     </aside>
     <aside v-visible="{ className: s.animate }" :class="s.panel">
-      <div :class="s.authorName">KEVINMINT</div>
+      <div :class="s.authorName">WillWu</div>
       <div :class="s.authorInfo">
         <img src="../assets/images/avatar.jpg" alt />
         <p>{{ $l.signature }}</p>

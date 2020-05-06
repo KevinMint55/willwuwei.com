@@ -18,7 +18,7 @@
         <div :class="s.findMe">
           <img
             v-clickoutside="closeWechat"
-            src="https://qiniu.kevinmint.com/qr.jpg"
+            src="https://qiniu.willwuwei.com/qr.jpg"
             alt
             :class="[showWechat ? s.show : '']"
           />
