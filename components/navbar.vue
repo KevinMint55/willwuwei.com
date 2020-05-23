@@ -37,11 +37,11 @@ export default {
           icon: 'km-archive',
           path: '/archives',
         },
-        // {
-        //   name: 'laboratory',
-        //   icon: 'km-lab',
-        //   path: '/lab',
-        // },
+        {
+          name: 'laboratory',
+          icon: 'km-lab',
+          path: '/lab',
+        },
         {
           name: 'guestbook',
           icon: 'km-guestbook',

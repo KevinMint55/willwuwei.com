@@ -21,7 +21,7 @@
         <li style="left: 80.3109%; top: 32.5%;" @click="turnPage(1)">下一页</li>
         <li style="left: 80.3109%; top: 67.5%;" @click="jumpMenu('/archives')">归档</li>
         <li style="left: 50%; top: 85%;" @click="jumpMenu('/about')">关于</li>
-        <li style="left: 19.6891%; top: 67.5%;" @click="jumpMenu('/messageBoard')">喵喵喵</li>
+        <li style="left: 19.6891%; top: 67.5%;" @click="jumpMenu('/messageBoard')">留言板</li>
         <li style="left: 19.6891%; top: 32.5%;" @click="turnPage(-1)">上一页</li>
       </ul>
     </div>

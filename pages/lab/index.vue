@@ -35,18 +35,18 @@ export default {
         },
         {
           name: 'vue-willtable',
-          des: 'An editable table component for @vuejs',
+          des: 'An editable table component for Vue.js 2.0',
           icon: 'xinjianbiaoge',
           path: 'https://demo.willwuwei.com/willtable',
           color: 'rgb(141, 187, 57)',
         },
-        {
-          name: 'mini-games',
-          des: '目前只支持五子棋人人对战与人机对战的小游戏平台',
-          icon: 'youxi',
-          path: 'http://mini.willwuwei.com',
-          color: 'RGB(195,195,195)',
-        },
+        // {
+        //   name: 'mini-games',
+        //   des: '目前只支持五子棋人人对战与人机对战的小游戏平台',
+        //   icon: 'youxi',
+        //   path: 'http://mini.willwuwei.com',
+        //   color: 'RGB(195,195,195)',
+        // },
       ],
     };
   },
