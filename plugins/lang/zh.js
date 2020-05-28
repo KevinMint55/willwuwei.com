@@ -5,7 +5,7 @@ export default {
     home: '首页',
     archive: '归档',
     laboratory: '实验室',
-    guestbook: '喵喵喵',
+    guestbook: '留言板',
     about: '关于我',
   },
   month: {
