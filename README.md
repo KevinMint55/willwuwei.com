@@ -1,6 +1,8 @@
-## willwuwei.com
+## About
 
-My blog by Nuxt.js & online site: https://www.willwuwei.com
+前端使用Nuxtjs实现的响应式博客，适配PC与手机端（PC端鼠标右键点击有小玩意儿）。
+
+后端使用nodejs + koa2开发。
 
 ## Build Setup
 
