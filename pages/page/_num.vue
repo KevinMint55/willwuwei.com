@@ -28,7 +28,7 @@ export default {
   },
   head() {
     return {
-      title: 'Welcome to my blog',
+      title: '前端技术分享',
     };
   },
 };
